@@ -1,0 +1,485 @@
+[
+  {
+    "objectID": "art.html",
+    "href": "art.html",
+    "title": "Artwork",
+    "section": "",
+    "text": "Returning to the studio after working on a delicate coil sculpture until 5am, my heart sank when I saw it had collapsed. Ceramics is unforgiving as clay shifts, molds, and remembers every touch. Yet confronting my perfectionism through ceramics has been central to developing my patience and resilience. Early failures building and wheel throwing frustrated me, but the process taught me to turn disappointment into experimentation and to value process over outcome. I am constantly reminded that my growth, like any piece I’ve made, requires constant reshaping, reflection, and the willingness to start again.\nThis selection of pieces are both a reflection of my identity but also growth.\n\n\n\n\n  \n  \n    \n      \n      \n      \n    \n    The World. Abstract Biomorphic Sculpture 24 inches. Made with coils.\n  \n\n  \n  \n    \n      \n      \n    \n    Crane Bowls. Wheel Thrown and Painted\n  \n  \n    \n    Mooncake Jars. Handbuilt and Carved.\n  \n\n  \n  \n    \n      \n      \n    \n    Bone Comb. Handbuilt and Reduction Fired with Iron Oxide Wash.\n  \n  \n    \n    Panda Whisk Holder. Wheel Thrown and Painted.\n  \n\n  \n  \n    \n      \n      \n    \n    Hold On. Abstract Skeletal Structure. Handbuilt 22 inches. This is the second skeletal structure I made after the first collapsed.\n  \n  \n    \n    Panda Dish. Wheel Thrown and Painted.\n  \n\n  \n  \n    \n      \n      \n    \n    Mirror, a piece for interpersonal connection. Handbuilt.\n  \n  \n    \n    Flower Bowl. Wheel Thrown and Painted.\n  \n\n  \n  \n    \n    Zodiac Bowl. Wheel Thrown and Painted.\n  \n  \n    \n    Dragon Bowl. Wheel Thrown and Carved.\n  \n  \n    \n    Dragon China Bowls. Wheel Thrown and Carved\n  \n\n  \n  \n    \n    Mahjong Cups. Wheel Thrown, Carved, and Painted.\n  \n  \n    \n    Kyusu Teapot. Wheel Thrown and Painted.\n  \n  \n    \n    Lucky Charm Tumbler. Wheel Thrown and Handbuilt.\n  \n\n  \n  \n    \n    Cherry Blossom Vase. Wheel Thrown and Handbuilt.\n  \n  \n    \n    Crane Tumbler. Wheel Thrown and Painted."
+  },
+  {
+    "objectID": "project/documentation.html",
+    "href": "project/documentation.html",
+    "title": "Documentation",
+    "section": "",
+    "text": "GitHub"
+  },
+  {
+    "objectID": "project/documentation.html#schematics",
+    "href": "project/documentation.html#schematics",
+    "title": "Documentation",
+    "section": "Schematics",
+    "text": "Schematics\nThe schematics of the physical system is shown below: \nThe microphone is connected to the PB0, the ADC input pin of the MCU. The MCU is then connected to the FPGA with the SPI outputs, and the FPGA is connected to the VGA using a breakout cord, where sync signals and pixel color signals are then transmitted. The \\(270 \\ohm\\) resistors were implemented since each the color pins of the VGA display allows a voltage of 0.7 V. However, our FPGA pins have an output of 3.3 V. By putting a \\(270 \\ohm\\) resistor in series with the internal \\(75 \\ohm\\) resistor in the VGA, a voltage divider can be created such that the voltage into the VGA is approximately 0.7 V."
+  },
+  {
+    "objectID": "project/documentation.html#new-hardware",
+    "href": "project/documentation.html#new-hardware",
+    "title": "Documentation",
+    "section": "New Hardware",
+    "text": "New Hardware\nTo experiment new hardwares that are not previously used in the class, we chose to implement an analog microphone and a VGA display.\n\nAnalog Microphone\nAn analog microphone is used to take in sound inputs in our system. The analog microphone, MAX4466 from Adafruit, should be supplied with a voltage of 2.4 to 5 V. The microphone can detect sound inputs from 20 to 20k Hz and has an adjustable gain of 25x to 125x. Without filtering, the circuit of this microphone is simple enough, with GND, VCC, and OUT, where the VCC is complient with our 3.3 V breakout board. This allows us to use the ADC function in the MCU that was not previously used in the course\n\n\nVGA Display\nTo display the score, we decided to use a VGA display. The VGA display we used was provided by Xavier, and has 1024 * 600 pixels. The refreshing rate of the VGA was chosen to be 60 Hz, such that there are no obvious frame discontinuity for human eye. A breakout cord was used to send signals between the FPGA and the VGA. More documentations on the design of VGA control can be found in the FPGA page. The VGA allows use to use the primitives, such as PLL_B for its clock, which is something new from the previous labs."
+  },
+  {
+    "objectID": "project/documentation.html#information-and-references",
+    "href": "project/documentation.html#information-and-references",
+    "title": "Documentation",
+    "section": "Information and References",
+    "text": "Information and References\nDetails on the hardware designs of the MCU and the FPGA can be found in their respective pages.\nThe source code for the project are all included in this Github repository.\n\nHardware References\n\nMCU - STM32L432KC [Reference Manual, Datasheet, Programming Manual]\nFPGA - iCE40UP [Datasheet, Oscillator User Guide]\nMicrophone - MAX4466 [Description Page, Datasheet]\nVGA Connector [Description Page, Universal DE-15 Pin assignments]\nE155 Breakout Board [Schematics, Adapter Schematics]\n\n\n\nOther Reference\n\nG. W. Slade, “The Fast Fourier Transform in Hardware: A Tutorial Based on an FPGA Implementation,” MIT 6.111 Course Handout, Mar. 21, 2013. [Online]. Available: https://web.mit.edu/6.111/www/f2017/handouts/FFTtutorial121102.pdf."
+  },
+  {
+    "objectID": "project/documentation.html#bill-of-materials",
+    "href": "project/documentation.html#bill-of-materials",
+    "title": "Documentation",
+    "section": "Bill of Materials",
+    "text": "Bill of Materials\n\n\n\n\n\n\n\n\n\n\nName\nPart #\nManufacturer\nQuantity\nPrice\n\n\n\n\nMicrophone\nMAX4466\nAdafruit\nx2\n$6.95 * 2 = $13.90\n\n\nAudio Codec\nMAX98357A\nAdafruit\nx1\n$5.95\n\n\nVGA Breakout Cord\n3124\nAdafruit\nx1\n$4.50\n\n\nAudio Jack to Micro USB B converter\n\nPIIHUSW\nx1\n$7.57 (with Amazon Prime)\n\n\nVGA Display\n\n\nx1\nstockroom\n\n\nOp-amp\nMCP601\n\nx1\nstockroom\n\n\nPotentiometer\n\n\nx1\nstockroom\n\n\nSpeaker\n\n\nx1\nstockroom\n\n\nSTM32L432KC Microcontroller\n\nSTMicroelectronics\nx1\nE155 teaching team\n\n\nUPDuino v3.1 ICE40 UP5K FPGA\n\ntinyVision.ai\nx1\nE155 teaching team\n\n\n\n\n\nTotal including shipping + tax\n$46.83 (shipping $12.56 & tax $2.35)"
+  },
+  {
+    "objectID": "project/team.html",
+    "href": "project/team.html",
+    "title": "About the Team",
+    "section": "",
+    "text": "Julia Gong\n\n\n\nLinkedIn | GitHub\n\nJulia Gong is a junior engineering major at Harvey Mudd College. She is interested in digital design and the integration of hardware systems. Outside of engineering, she enjoys creative, hands-on work, including pottery, bead embroidery, painting, and knitting.\n\n\n\nGeorgia Tai\n\n\n\nLinkedIn | GitHub\n\nGeorgia Tai is a junior engineering student at Harvey Mudd College with an interest in computer and electrical engineering. Born and raised in Hsinchu, Taiwan, she developed a passion for electrical engineering. Outside of engineering, she enjoys music, drawing, and reading mangas."
+  },
+  {
+    "objectID": "project/overview.html",
+    "href": "project/overview.html",
+    "title": "Live Music Transcriber",
+    "section": "",
+    "text": "This project aims to take in sound inputs — whether from a keyboard, any instrument, or someone singing — transcribe the sound onto a score in real-time at a given BPM, and play back the input melody. An FPGA is used as the main calculation and display engine, using Fast Fourier Transform (FFT) to handle frequency analysis and driving a VGA display. A MCU is used for interfacing the audio inputs.\nOn the hardware level, an analog microphone takes in sounds, where the MCU converts them into digital signals using ADC and sends the converted signals to the FPGA over SPI. The FPGA then uses FFT to extract the frequency and duration of the note inputted. The array of notes is used by the FPGA to calculate the pixels for displaying the score on a VGA display."
+  },
+  {
+    "objectID": "project/overview.html#project-abstract",
+    "href": "project/overview.html#project-abstract",
+    "title": "Live Music Transcriber",
+    "section": "",
+    "text": "This project aims to take in sound inputs — whether from a keyboard, any instrument, or someone singing — transcribe the sound onto a score in real-time at a given BPM, and play back the input melody. An FPGA is used as the main calculation and display engine, using Fast Fourier Transform (FFT) to handle frequency analysis and driving a VGA display. A MCU is used for interfacing the audio inputs.\nOn the hardware level, an analog microphone takes in sounds, where the MCU converts them into digital signals using ADC and sends the converted signals to the FPGA over SPI. The FPGA then uses FFT to extract the frequency and duration of the note inputted. The array of notes is used by the FPGA to calculate the pixels for displaying the score on a VGA display."
+  },
+  {
+    "objectID": "project/overview.html#project-motivation",
+    "href": "project/overview.html#project-motivation",
+    "title": "Live Music Transcriber",
+    "section": "Project Motivation",
+    "text": "Project Motivation\nBoth of us are interested in digital design and audio processing, so we wanted to leverage the FPGA’s fast computational capabilities to process sound. Due to the importance and wide applications of the FFT, we wanted to design and integrate FFT in hardware. We chose VGA to display the output because we wanted to accurately depict a music score, which required a higher pixel resolution."
+  },
+  {
+    "objectID": "project/overview.html#system-block-diagram",
+    "href": "project/overview.html#system-block-diagram",
+    "title": "Live Music Transcriber",
+    "section": "System Block Diagram",
+    "text": "System Block Diagram\n\nThe system block diagram shows the flow of the design, starting with an input from a microphone which is sampled by the MCU’s internal ADC. The MCU’s ADC output is sent over to the FPGA using SPI. The music score and notes are output from the FPGA to the VGA monitor."
+  },
+  {
+    "objectID": "project/overview.html#note-display",
+    "href": "project/overview.html#note-display",
+    "title": "Live Music Transcriber",
+    "section": "Note Display",
+    "text": "Note Display\n\n\nNote: The aliasing seen in the video is not on the VGA monitor, but occurs when recording on a phone since the VGA display refreshes at 60Hz and the phone records at a lower frequency."
+  },
+  {
+    "objectID": "project/overview.html#acknowledgements",
+    "href": "project/overview.html#acknowledgements",
+    "title": "Live Music Transcriber",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nWe would like to thank Prof. Spencer for all his advice in debugging our system and for challenging us to build this complex project. We would also like to thank Xavier for providing the VGA monitors and the grutors Kavi, Troy, and Vikram for their helpful debugging tips.\nLastly, a shoutout to our friends in Microps who accompanied us during late nights in the lab and offered support throughout the process!"
+  },
+  {
+    "objectID": "labs/lab4/lab4.html",
+    "href": "labs/lab4/lab4.html",
+    "title": "Lab 4: Digital Audio",
+    "section": "",
+    "text": "In this lab, I used the timers in an STM32L432KC microcontroller to generate square waves by toggling a GPIO pin at specific frequencies and durations. These frequencies and durations were used to create digital audio. This involved reading and understanding the MCU datasheet in order to write a C library from scratch."
+  },
+  {
+    "objectID": "labs/lab4/lab4.html#introduction",
+    "href": "labs/lab4/lab4.html#introduction",
+    "title": "Lab 4: Digital Audio",
+    "section": "",
+    "text": "In this lab, I used the timers in an STM32L432KC microcontroller to generate square waves by toggling a GPIO pin at specific frequencies and durations. These frequencies and durations were used to create digital audio. This involved reading and understanding the MCU datasheet in order to write a C library from scratch."
+  },
+  {
+    "objectID": "labs/lab4/lab4.html#mcu-design-and-testing-methodology.",
+    "href": "labs/lab4/lab4.html#mcu-design-and-testing-methodology.",
+    "title": "Lab 4: Digital Audio",
+    "section": "MCU Design and Testing Methodology.",
+    "text": "MCU Design and Testing Methodology.\nThe design was developed by using two timers on the MCU: TIM16 and TIM6. TIM16 was used to create a PWM signal for the frequencies while TIM6 was used to calculate the delay in ms.\nThe maximum and minimum frequencies and durations for the system were calculated below. TIM16 used a prescalar value of 19 in order to divide the system clock into a 4MHz clock and TIM6 used a prescalar value of 39,999 in order to divide the system clock into a 2KHz clock.\nIn addition to calculations, the frequency of the square waves will be verified using the oscilloscope.\n\n\n\nFigure 1: This image shows the frequency and duration calculations.\n\n\nThis image shows that the pitches for frequencies in the range 220-1000 Hz, as well as a couple frequencies above and below are accurate within 1%. \n\nHardware Implementation\n\n\n\nFigure 3: This image shows the breadboard layout speaker system.\n\n\nThe components of this lab consisted of a LM386 op-amp, a 10kΩ potentiometer, and a 8Ω speaker. The op-amp was implemented to amplify the output signal from the MCU pin (PA6) and the potentiometer was used to adjust the volume of the system."
+  },
+  {
+    "objectID": "labs/lab4/lab4.html#technical-documentation",
+    "href": "labs/lab4/lab4.html#technical-documentation",
+    "title": "Lab 4: Digital Audio",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\nThe code for this lab can be found in this Github repository. This contains the code for the C and Header files for the main module, RCC, GPIO, FLASH, TIM6, and TIM16.\n\nSchematic\nThe schematic below depicts the pin assignments and connections for the MCU, potentiometer, op-amp, and speaker system.\n\n\n\nFigure 3: The image shows the schematic of the digital audio hardware system."
+  },
+  {
+    "objectID": "labs/lab4/lab4.html#results-and-discussion",
+    "href": "labs/lab4/lab4.html#results-and-discussion",
+    "title": "Lab 4: Digital Audio",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThe digital audio system was able to play Fur Elise without sounding very crackly. Additionally, I was able to transpose a melody from one of my favorite jazz songs. Try to guess the song!\n\n\n\n\n\nFigure 5: This image shows the melody of the mystery song.\n\n\n\nOscilloscope Frequency Verification\nIn order to verify the frequencies produced by my design, I measured the frequency of the PA6 pin. To test the range of frequncies, I decided to test 200 Hz and 2000 Hz.\nThe oscilloscope trace of the 200 Hz PWM input, shows a square wave output from the PA6 pin where the output frequency is exactly 200 Hz! \nThe oscilloscope trace for the 2000 Hz PWM input showed the expected output of 2000 Hz. This shows that the design was able to accurately output frequencies less than 1%"
+  },
+  {
+    "objectID": "labs/lab4/lab4.html#conclusion",
+    "href": "labs/lab4/lab4.html#conclusion",
+    "title": "Lab 4: Digital Audio",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe design was successfully able to produce square waves at different frequencies using the timers and pins on the MCU. It was super exciting to hear the the songs play smoothly. For a while, I was able to hear my songs play but they sounded very crackly. I thought it was because my code for the frequency was incorrect, but I figured out that it was because my op-amp pins weren’t grounded.\nThis lab took a total of 12 hours."
+  },
+  {
+    "objectID": "labs/lab4/lab4.html#ai-prototype-summary",
+    "href": "labs/lab4/lab4.html#ai-prototype-summary",
+    "title": "Lab 4: Digital Audio",
+    "section": "AI Prototype Summary",
+    "text": "AI Prototype Summary\nFor the AI prototype, I prompted ChatGPT with: What timers should I use on the STM32L432KC to generate frequencies ranging from 220Hz to 1kHz? What’s the best choice of timer if I want to easily connect it to a GPIO pin? What formulae are relevant, and what registers need to be set to configure them properly?\nThe response that I got from ChatGPT was very helpful because it provided me a list of all the timers with descriptions for their purposes. It also generated the timer frequency formula and provided an example calculation."
+  },
+  {
+    "objectID": "labs/lab2/lab2.html",
+    "href": "labs/lab2/lab2.html",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "",
+    "text": "In this lab, I used time multiplexing to drive two 7-segment displays using a single set of FPGA I/O pins. Time multiplexing was used because the anode of the 7-segment displays required more current than the FPGA output could provide. The dual 7-segment display takes inputs from 2 DIP switches, each are 4 bits, and outputs the values from each input. Additionally, the sum of the digits are shown on a set of 5 LEDs."
+  },
+  {
+    "objectID": "labs/lab2/lab2.html#introduction",
+    "href": "labs/lab2/lab2.html#introduction",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "",
+    "text": "In this lab, I used time multiplexing to drive two 7-segment displays using a single set of FPGA I/O pins. Time multiplexing was used because the anode of the 7-segment displays required more current than the FPGA output could provide. The dual 7-segment display takes inputs from 2 DIP switches, each are 4 bits, and outputs the values from each input. Additionally, the sum of the digits are shown on a set of 5 LEDs."
+  },
+  {
+    "objectID": "labs/lab2/lab2.html#fpga-design-and-testing-methodology.",
+    "href": "labs/lab2/lab2.html#fpga-design-and-testing-methodology.",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "FPGA Design and Testing Methodology.",
+    "text": "FPGA Design and Testing Methodology.\nThe design was developed using a clock divider that toggles the frequency, a mux that chooses which anode will be turned on, an adder that determines the sum of the inputs for the LED display, and the 7-segment display module created in Lab 1.\nSince 60Hz is the largest frequency that humans can process, I decided to toggle the counter at 80Hz so that the frequency would not be too fast that they numbers would bleed together.\nThe led display, 7-segment display, mux, and top module will all be verified using self-checking testbenches.\n\nHardware Implementation\n\n\n\nFigure 1: This image shows the breadboard layout of the dual 7-segment display as well the 5 LEDs connected to the FPGA.\n\n\nThe components of this lab consisted of the development board, a dual 7-segment display, 5 LEDs, two 2N3906 PNP transistors, and a DIP switch.\nWhen implementing the design onto the breadboard, 220Ω resistors were used to draw current from each segment of the dual 7-segment display. Since there was a PNP transistor connected to the anodes, there is a Vceast of 200mV. Additionally, there is a voltage drop from the LED segment of 1.8V. Using V = IR, (3.3V - 0.2V - 1.8V)/10mA = R, where R = 130Ω.\nThe resistors used to connect the base of the PNP transistor to the FPGA pins were 330Ω resistors. This value was calculated using V = IR, where V = 3.3V - 0.65V and Ic = 8mA. 0.65V is the base emitter saturation voltage found on the datasheet and 8mA is the current limit.\nFor the LEDs, the voltage drop for a red LED is approximately 2.1 V and the desired current is around 10mA. Using the equation V = IR, R = (3.3-2.1V)/20mA = 110. To ensure the proper current I used 220Ω resistors."
+  },
+  {
+    "objectID": "labs/lab2/lab2.html#technical-documentation",
+    "href": "labs/lab2/lab2.html#technical-documentation",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\nThe code for this lab can be found in this Github repository. This contains the code for the top module, led display module, mux module, and 7-segment display module in addition to the testbenches for all four modules.\n\nBlock Diagram\nThe block diagram below depicts how the input and internal signals are connected among the modules to produce the 7-segment display and LED outputs.\n\n\n\nFigure 2: This image shows the block diagram that connects all the modules.\n\n\n\n\nSchematic\nThe schematic below depicts the pin assignments for the hardware components.\n\n\n\nFigure 3: The image shows the schematic of the FPGA and the conections to the dual 7-segment display and LEDs."
+  },
+  {
+    "objectID": "labs/lab2/lab2.html#results-and-discussion",
+    "href": "labs/lab2/lab2.html#results-and-discussion",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nAll of the 7-segment display and led display outputs work as expected. This can be shown through simulation results as well as hardware performance.\n\nTestbench Simulation\nThe waveforms from the mux module simulation show that the mux is choosing the proper values for s[3:0], anode1, and anode2.\n \nThe waveforms from the led module show that the sum of the inputs s1[3:0] and s2[3:0] are properly summed and assigned to each bit of the LED display.  \nThe waveforms for the 7-segment display verify that the proper pattern of segments are lit up in response to the 4-bit input.  \nThe waveforms for the top module show that the values for anode1 and anode2 are toggling in response to the counter/select value at the correct frequency. As a result the simulation results indicate that the proper segment output is chosen."
+  },
+  {
+    "objectID": "labs/lab2/lab2.html#conclusion",
+    "href": "labs/lab2/lab2.html#conclusion",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe design successfully displayed the inputs on the dual 7-segment display through time multiplexing and added the values of the inputs to display on the 5 LEDS.\nThis lab took a total of 8 hours."
+  },
+  {
+    "objectID": "labs/lab2/lab2.html#ai-prototype-summary",
+    "href": "labs/lab2/lab2.html#ai-prototype-summary",
+    "title": "Lab 2: Multiplexed 7-Segment Display",
+    "section": "AI Prototype Summary",
+    "text": "AI Prototype Summary\nFor the AI prototype, I prompted ChatGPT with: Write SystemVerilog HDL to time multiplex a single seven segment decoder (that decodes from four bits to a common anode seven segment display) to decode two sets of input bits and drive two sets of seven output bits.\nAfter evaluating the code that ChatGPT wrote, I think that the logic of it all looks pretty good. This main noticable error is the value for the 7-segment display outputs. They switching the order of the bits to read from lead significant to most significant. I do think that ChatGPT was able to produce this code well because the logic is fairly simple and straightforward.\nThe link to the conversation can be found here."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html",
+    "href": "labs/lab6/lab6.html",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "",
+    "text": "In this lab, the objective was to design and build a simple IoT device, write C libraries to implement SPI on the MCU and interface with a temperature sensor, interface with a ESP8266 module using UART, and write an HTML page to control an LED and temperature sensor. The webpage allows users to select the output resolution for the temperature sensor and displays the temperature sensor reading. When selecting a specific resolution on the webpage, the MCU would then send the specific write and read commands to the temperature sensor."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#introduction",
+    "href": "labs/lab6/lab6.html#introduction",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "",
+    "text": "In this lab, the objective was to design and build a simple IoT device, write C libraries to implement SPI on the MCU and interface with a temperature sensor, interface with a ESP8266 module using UART, and write an HTML page to control an LED and temperature sensor. The webpage allows users to select the output resolution for the temperature sensor and displays the temperature sensor reading. When selecting a specific resolution on the webpage, the MCU would then send the specific write and read commands to the temperature sensor."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#mcu-design-and-testing-methodology.",
+    "href": "labs/lab6/lab6.html#mcu-design-and-testing-methodology.",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "MCU Design and Testing Methodology.",
+    "text": "MCU Design and Testing Methodology.\nThe MCU interface consisted of UART communication to the ESP8266 and SPI communication to the temperature sensor. Inputs for the temperature sensor inputs relied on values received by the MCU through UART.\nTo create the digital interface for the lab, the MCU must supply a webpage to the ESP8266 and interpret its requests. The 125000 baud serial UART connection on the MCU and UART TX and RX lines of the ESP8266 were used to interface between the devices. Therefore, the ESP8266 updates the webpage from the MCU, sending the most recent request from the user. The MCU then transmits a webpage encoded as an HTML file to the ESP8266. The ESP8266 creates a WIFI access point. Once connecting to the network, http://192.168.4.1/ displays the webpage.\nTemperature sensor resolution commands receieved from the user to the MCU are then used to determine the write and read commands sent to the temperature sensor over SPI. The number of resolution bits is first written to the temperature sensor register, and then a read register command reads 2 bytes of data that contain the temperature. The 2 bytes are split into the MSB and LSB byte, where the MSB contains a signed bit. The equation \\(Temp = MSB + LSB/256.0\\) was used to extract the correct temperature from these bytes. This value is then included on the webpage and sent to the ESP8266 over UART.\n\nHardware Implementation\nThe system hardware included connection to the ESP8266 and temperature sensor. The ESP8266 was directly placed into the MikroBUS socket on the development board while the temperature sensor and LED were directly connected to the MCU pins."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#technical-documentation",
+    "href": "labs/lab6/lab6.html#technical-documentation",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\nThe code for this lab can be found in this Github repository. This contains the code for main.c, SPI configuration, temperature sensor configuration as well as external libraries used.\n\nSchematic\nThe schematic below depicts the connections between the MCU, LED, ESP8266, and the temperature sensor.\n\n\n\nFigure 1: The image shows the schematic of the MCU connections with the peripherals."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#results-and-discussion",
+    "href": "labs/lab6/lab6.html#results-and-discussion",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThe system was able to correctly interface with the LED and temperature sensor through the HTML website. The website clearly displays the temperature sensor readings as well as buttons to select the resolution for the temperature sensor. The display shows how the temperature sensor readings get more precise as the resolution increases.\n\n\n\nSPI Logic Analyzer Trace\nA logic analyzer was used to debug and verify SPI communication.\n\nDO shows SPI chip select\nD1 shows the CLK\nD2 shows MISO (microcontroller in, peripheral out)\nD3 shows MOSI (microcontroller out, peripheral in)\n\nAfter the chip select goes high for the first time, the microcontroller sends 0x80, which indicates the address of the write config register, followed by 0xE0, which sets up an 8-bit temperature resolution. After the chip select goes high for the second time, the microcontroller sends 0x02 to read the MSB followed by 0x00 which is a filler command so that the microcontroller can receive data from the temperature sensor. The microcontroller receives 0x17 for the MSB. Then, the microcontroller sends 0x01 followed by a filler 0x00 command to read and receive the LSB from the temperature sensor. The microcontroller reads 0x00. Decoding the temperature results in \\(Temp = 23 + \\frac{0}{256} = 23 ^\\circ C\\)\n\n\n\nFigure 2: The image above shows the logic analyzer trace for an 8 bit temperature sensor command."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#conclusion",
+    "href": "labs/lab6/lab6.html#conclusion",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "Conclusion",
+    "text": "Conclusion\nI was able to design a system that interfaces with a temperature sensor using SPI and ESP8266 using UART to create a webpage that controls and displays the temperature data! This lab took a total of 12 hours."
+  },
+  {
+    "objectID": "labs/lab6/lab6.html#ai-prototype-summary",
+    "href": "labs/lab6/lab6.html#ai-prototype-summary",
+    "title": "Lab 6: The Internet of Things and Serial Peripheral Interface",
+    "section": "AI Prototype Summary",
+    "text": "AI Prototype Summary\nFor my AI prototype I asked ChatGPT these two prompts:\n\nI’m making a web portal to interface with a temperature sensor. Create a HTML page that looks good and is intuitive to show the temperature, control an LED, and change the precision of the readout.\nWrite me a C function to carry out a SPI transaction to retrieve a temperature reading from a DS1722 sensor. Make use of CMSIS libraries for the STM32L432KC.\n\nFor the first prompt ChatGPT produced a webpage that was a lot more aesthetically pleasing than mine, which included aspects such as different colors and font sizes. As for the second prompt ChatGPT was able to produce code for SPi communication, but it was incorrect. It got the phase for the temperature sensor wrong and wasn’t able to properly calculate the temperature reading."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html",
+    "href": "labs/lab1/lab1.html",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "",
+    "text": "In Lab 1, a development board containing a FPGA (UPduino v3.1) and MCU (mikroBUS_Socket) was soldered together. The objective of the lab was to program the FPGA with Verilog code that responds to 4 input DIP switches and outputs a specific seven segment display as well as three LED displays. Other learning outcomes of the lab consisted of soldering, testing, and debugging circuits and Verilog."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#introduction",
+    "href": "labs/lab1/lab1.html#introduction",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "",
+    "text": "In Lab 1, a development board containing a FPGA (UPduino v3.1) and MCU (mikroBUS_Socket) was soldered together. The objective of the lab was to program the FPGA with Verilog code that responds to 4 input DIP switches and outputs a specific seven segment display as well as three LED displays. Other learning outcomes of the lab consisted of soldering, testing, and debugging circuits and Verilog."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#fpga-design-and-testing-methodology.",
+    "href": "labs/lab1/lab1.html#fpga-design-and-testing-methodology.",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "FPGA Design and Testing Methodology.",
+    "text": "FPGA Design and Testing Methodology.\nThe following tables from the lab instructions establish the relationship between the various inputs and outputs on the development board.\n\n\n\nFigure 1: This table displays the inputs and outputs required in the FPGA design.\n\n\n\n\n\nFigure 2: This table defines the relationship between the input DIP switches and the led outputs.\n\n\nThe design was developed using a clock divider, boolean algebra, and multiplexers. The clock divider would create the 2.4Hz oscillating LED, the boolean algebra would select between the DIP switch input signals to determine the other LED outputs, and the multiplexers would select the corresponding segment outputs for the 7-segment display. The 7-segment displays all the hexidecimal digits distinctly.\nThe 7-segment display has a common anode, meaning that the cathode must be grounding in order to cause the LED to turn on. Therefore, the Verilog code would send a “0” to turn on a segment and a “1” to turn off a segment.\nThe outputs of the LEDs and 7-segment display would be verified using a self-checking testbench and an oscilloscope trace.\n\nHardware Implementation\nThe development board was assembled by soldering votage regulars, SMT components (resistors, capacitors, and LEDs), and various THT components. The schematic of the development board layout can be found here.\n\n\n\nFigure 3: This image depicts the completed development board.\n\n\n\n\n\nFigure 4: This image depicts the physical breadboard layout of the 7-segment display.\n\n\nThe resistors used in the 7-segment display were determined by looking at the segment luminous intensity and voltage drop in the datasheet. From the datasheet, the desired current for the display is 10mA and the voltage drop for the segment is 2.1V. Using the equation V = IR, the desired resistor value for the segment display can be determined. The 7-segment display was supplied 3.3V, so V = 3.3V - 2.1V = 1.2V. After solving for R (resistor value), R was equal to approximately 120Ω. In my design I used 220Ω resistors to ensure that the current drawn from each segment would be appropriate."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#technical-documentation",
+    "href": "labs/lab1/lab1.html#technical-documentation",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\nThe source code from this lab can be found in my Github repository. The code contains the two Verilog modules, 2 testbenches (one for each module), and 2 testvector files.\n\nBlock Diagram\nThe block diagram shows the 7-segment display Verilog module, the clock divider, and the overall top module for this lab.\n\n\n\nFigure 5: This image depicts the block diagram for the two Verilog modules\n\n\n\n\nSchematic\nThe schmatic outlines the FPGA pin assigments for the 4 DIP switches, LEDs, and 7-segment display.\n\n\n\nFigure 6: This image depicts the schematic for the FPGA and 7-segment display."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#results-and-discussion",
+    "href": "labs/lab1/lab1.html#results-and-discussion",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThe results of this lab were verified using an automatic testbench simulation on Questa and an oscilloscope trace to verify the LED oscillating frequency. The video below shows the 7-segment display and LEDs responding to DIP switch inputs.\n\n\nTestbench Simulation\n \nThe waveforms and transcript from the Questa simulation show that the expected outputs matched the outputs in the Verilog modules. All 16 tests were completed with no errors.\n\n\nOscilloscope Trace\nThe desired frequency for led[2] was 2.4Hz. The oscilloscope trace shows that the measured frequency for led[2] was 2.4Hz.\n\n\n\nFigure 8: This image depicts the oscilloscope trace of the LED. The frequency of the LED is shown on the bottom left."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#conclusion",
+    "href": "labs/lab1/lab1.html#conclusion",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe design meets all of the requirements for the lab. The development board is completely finished and put together, and the outputs for the 7-segment display and the LEDs all match the expected outputs. All the hexidecimal digits displayed on the 7-segment display are unique, and each segment has the same brightness.\nI spent a total number of 15 hours on this lab. A large amount of time in this lab was spent soldering as well as learning about the Lattice Radiant enviroment. There were many small errors I made along the way as well as specific details about Lattice Radiant that could have been helpful to know about in the Lab 1 description. A tip that could have been very helpful would be how to navigate the “FTDI Error” that occurs when trying to program the FPGA."
+  },
+  {
+    "objectID": "labs/lab1/lab1.html#ai-prototype-summary",
+    "href": "labs/lab1/lab1.html#ai-prototype-summary",
+    "title": "Lab 1: FPGA and MCU Setup and Testing",
+    "section": "AI Prototype Summary",
+    "text": "AI Prototype Summary\nFor the AI Prototype, I gave ChatGPT the following prompt: Write SystemVerilog HDL to leverage the internal high speed oscillator in the Lattice UP5K FPGA and blink an LED at 2 Hz. Take full advantage of SystemVerilog syntax, for example, using logic instead of wire and reg.\nThe code that ChatGPT generated included several local parameters in order to cause the LED to blint at 2Hz. I do think the code produced by ChatGPT included a lot of unnecessary parameters, and the logic could be improved/simplified. The output also provided lots of detailed comments about the code as well as information With more guidance and specificity, I do think that ChatGPT could generate better code. After providing more context, with another prompt, ChatGPT was able to produce better code.\nThe transcript of the chat, including the code generated, can be found here."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html",
+    "href": "labs/lab5/lab5.html",
+    "title": "Lab 5: Interrupts",
+    "section": "",
+    "text": "In this lab, I used an MCU in order to determine the speed of a motor by reading interrupts from quandrature encoder. Quandrature encoders measure the relative or absolute angle of a motor tracking how quickly the patterned disk added onto the motor rotates. Two sensors are 90 degrees of of phase to determine direction and speed of rotation with high resolution. The motor has 408 pulses per rotation and rotates at a speed of approximately 2 rev/s when 10V is supplied to the motor.\nThe main objective of this lab was to determine (and print out) the speed of the motor and direction, updating every 1Hz."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#introduction",
+    "href": "labs/lab5/lab5.html#introduction",
+    "title": "Lab 5: Interrupts",
+    "section": "",
+    "text": "In this lab, I used an MCU in order to determine the speed of a motor by reading interrupts from quandrature encoder. Quandrature encoders measure the relative or absolute angle of a motor tracking how quickly the patterned disk added onto the motor rotates. Two sensors are 90 degrees of of phase to determine direction and speed of rotation with high resolution. The motor has 408 pulses per rotation and rotates at a speed of approximately 2 rev/s when 10V is supplied to the motor.\nThe main objective of this lab was to determine (and print out) the speed of the motor and direction, updating every 1Hz."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#mcu-design-and-testing-methodology.",
+    "href": "labs/lab5/lab5.html#mcu-design-and-testing-methodology.",
+    "title": "Lab 5: Interrupts",
+    "section": "MCU Design and Testing Methodology.",
+    "text": "MCU Design and Testing Methodology.\nThe design was developed by using interrupts. Interrupts were used both from the signals from the encoders and the timer.\nThe interrupt for the quad encoder signals would fire when the system recorded a signal from the B or A signal, where the design detected all edges of the encoder pulses to achieve high resolution. The current state on the encoder would update respectively. A lookup table was implemented in order to create the counter logic, indicating when the encoder has changed states. The lookup table starts with 4 bits indicating the next state transitions from 00, where 0 represents an illegal state switch, 1 represents clockwise increase, and -1 represents counterclockwise decrease. The following 4 bits indicate the next state transitions for 01, then 10, and ending with 11. The indexing of the lookup table relies on the previous state shifted left two bits and the current state in the two least significant bits. The values from the lookup table are then added to the encoder count and the previous state gets the current state.\nThe interrupt for the timer fires every millisecond and once it counts to 1000 ms (1 second), the count difference is calculated and used to calculate the revolutions per second. The count difference is divided by 1632 because the design is decoding the rising and falling edges of A and B (4 total), and since the motor has 408 pulses per rotation. The rps is printed out every second and the timer resets to begin sampling again.\n\nHardware Implementation\nThe layout of the system was fairly simple. The MCU was directly connected to the pins of the motor, no external breadboarding was required."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#technical-documentation",
+    "href": "labs/lab5/lab5.html#technical-documentation",
+    "title": "Lab 5: Interrupts",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\nThe code for this lab can be found in this Github repository. This contains the code for main.c file as well as external libraries used.\n\nSchematic\nThe schematic below depicts the connections between the MCU and the motor.\n\n\n\nFigure 1: The image shows the schematic of the digital audio hardware system.\n\n\nThe flow chart below shows how interrupts are handled in the system."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#results-and-discussion",
+    "href": "labs/lab5/lab5.html#results-and-discussion",
+    "title": "Lab 5: Interrupts",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThe system was able to correctly calculate the angular velocity of the motor in both the clockwise and counter clockwise directions. When the supply voltage was 10V, the print in the debugger read around +- 2 rev/s (depending on the direction). Additionally, the ancular velocity increased and decreased in respones to voltage supplied to the motor and read 0 when the power supply was off.\n\nOscilloscope Interrupt Pin Toggling\nIn order to observe the tradeoffs between using interrupts and polling to measure the angular velocity, I wrote some code for polling so I can toggle a pin for both to compare the toggling frequency for interrupts and polling.\nThe oscilloscope trace for interrupts shows a frequency of 2.4kHz, indicating the speed in which the interrupts are occurring. This means that for the polling to be able to sample all the encoder state changes, it must be sampling at least 4.8kHz (two times the frequency of the interrupts) to sample all the state changes and avoid aliasing. \nThe oscilloscope trace for the polling shows are frequency of 2.20kHz as well as some breaks in the squre waves. This is likely because the system is polling too slowly to detect all the state changes."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#conclusion",
+    "href": "labs/lab5/lab5.html#conclusion",
+    "title": "Lab 5: Interrupts",
+    "section": "Conclusion",
+    "text": "Conclusion\nI was able to design a system using interrupts to calculate the angular velocity of a motor using the rising and falling edges of the encoders! This lab took a total of 8 hours."
+  },
+  {
+    "objectID": "labs/lab5/lab5.html#ai-prototype-summary",
+    "href": "labs/lab5/lab5.html#ai-prototype-summary",
+    "title": "Lab 5: Interrupts",
+    "section": "AI Prototype Summary",
+    "text": "AI Prototype Summary\nFor my AI prototype, I prompted ChatGPT with: Write me interrupt handlers to interface with a quadrature encoder. I’m using the STM32L432KC, what pins should I connect the encoder to in order to allow it to easily trigger the interrupts?\nChatGPT responded with the correct pins that can be used to connect the encoder to trigger interrupts, howevever, the interrupt handlers did not run. ChatGPT suggested that I use the TIM encoder mode and to not use EXTI/GPIO interrupts unless they were necessary. I found this interesting since I was using EXTI interrupts in this lab and thought that they did they job well."
+  },
+  {
+    "objectID": "labs/lab3/lab3.html",
+    "href": "labs/lab3/lab3.html",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "",
+    "text": "The purpose of this lab was to debounce the signals from a key press on a 4x4 keyboard. The last two imputs pressed would be dispayed on a dual 7-segment display. Additionally, the display would not lock up if multiple inputs are pressed and should ignore other inputs when one key is held down."
+  },
+  {
+    "objectID": "labs/lab3/lab3.html#introduction",
+    "href": "labs/lab3/lab3.html#introduction",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "",
+    "text": "The purpose of this lab was to debounce the signals from a key press on a 4x4 keyboard. The last two imputs pressed would be dispayed on a dual 7-segment display. Additionally, the display would not lock up if multiple inputs are pressed and should ignore other inputs when one key is held down."
+  },
+  {
+    "objectID": "labs/lab3/lab3.html#fpga-design-and-testing-methodology.",
+    "href": "labs/lab3/lab3.html#fpga-design-and-testing-methodology.",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "FPGA Design and Testing Methodology.",
+    "text": "FPGA Design and Testing Methodology.\nIn this lab I designed an FSM in order to debounce the keyboard properly. The focus of this lab was to design synchronous sequential logic, which made me aware of synchronizing my column inputs as well as keeping track of what clock cycles specific values update at.\nI used the dual 7-segment display from Lab 2, so I kept the same clock divider, hardware layout, and submodules.\n\nHardware Implementation\n\n\n\nFigure 1: This image shows the breadboard layout of the dual 7-segment display with the 4x4 keyboard.\n\n\nThe components of this lab consisted of the development board, a 4x4 keypad, a dual 7-segment display, two 2N3906 PNP transistors. The keyboard schematic can be found here.\nWhen implementing the design onto the breadboard, 220Ω resistors were used to draw current from each segment of the dual 7-segment display. Since there was a PNP transistor connected to the anodes, there is a Vceast of 200mV. Additionally, there is a voltage drop from the LED segment of 1.8V. Using V = IR, (3.3V - 0.2V - 1.8V)/10mA = R, where R = 130Ω.\nThe resistors used to connect the base of the PNP transistor to the FPGA pins were 330Ω resistors. This value was calculated using V = IR, where V = 3.3V - 0.65V and Ic = 8mA. 0.65V is the base emitter saturation voltage found on the datasheet and 8mA is the current limit.\nAdditionally, current limiting resistors were used to connect the keypad pins to the FPGA pins. Using V = IR, where V = 3.3 and I = 8mA, R = 410 Ω. I found 510Ω resistors and used them to limit current."
+  },
+  {
+    "objectID": "labs/lab3/lab3.html#technical-documentation",
+    "href": "labs/lab3/lab3.html#technical-documentation",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "Technical Documentation",
+    "text": "Technical Documentation\nThe code for this lab can be found in this Github repository. This contains the code for the top module, the submodules used, as well as the testbenches made.\n\nFSM State Transition Table\nIn order to determine the debounce of the keys, I implemented a finite state machine. There are a total of 6 states. I do think that my finite state machine was effective in debouncing the key inputs. However, it can definitely be made more efficients so that there are ony 4 states (eliminating the INPUT_WAIT and DEBOUNCE_WAIT stages).\nI chose to debounce the keypad using an FSM with counters. This approach ensures that both the press and release of a key are validated over a minimum time, avoiding multiple false triggers due to switch bounce. Compared to hardware RC circuits, the FSM approach is more flexible since debounce times can be tuned in code. Compared to shift-register or oversampling methods, my design uses fewer flip-flops and integrates naturally with the keypad state machine. The tradeoff is that very brief taps shorter than the debounce window may be missed, but for human inputs this timing works.\n\n\n\nFigure 2: This image shows the finite state machine used to debounce they key inputs.\n\n\nThe state transition table can be seen below:\n\n\n\n\n\n\n\n\n\nCurrent State\nInput Condition\nNext State\nOutputs (row_stop, key_valid, reset_count)\n\n\n\n\nWAIT\nkey_col != 0 && $countones(key_col) == 1 && key_val[7:4] != 0\nINPUT\n1, 0, 0\n\n\nWAIT\notherwise\nWAIT\n0, 0, 0\n\n\nINPUT\n(always)\nINPUT_WAIT\n1, 0, 0\n\n\nINPUT_WAIT\ncounter[2] == 1\nHOLD\n1, 1, 1\n\n\nINPUT_WAIT\notherwise\nINPUT_WAIT\n1, 0, 1\n\n\nHOLD\nkey_col == 0\nDEBOUNCE\n1, 0, 0\n\n\nHOLD\notherwise\nHOLD\n1, 0, 0\n\n\nDEBOUNCE\n(always)\nDEBOUNCE_WAIT\n1, 0, 0\n\n\nDEBOUNCE_WAIT\ncounter[2] == 1\nWAIT\n1, 0, 1\n\n\nDEBOUNCE_WAIT\notherwise\nDEBOUNCE_WAIT\n1, 0, 1\n\n\n\n\n\nBlock Diagram\nThe block diagram below shows all the submodules and how they interact with one another.\n\n\n\nFigure 3: This image shows the block diagram that connects all the modules.\n\n\n\n\nSchematic\nThe schematic below depicts the pin assignments for the hardware components.\n\n\n\nFigure 4: The image shows the schematic of the FPGA and the conections to the dual 7-segment display and keypad."
+  },
+  {
+    "objectID": "labs/lab3/lab3.html#results-and-discussion",
+    "href": "labs/lab3/lab3.html#results-and-discussion",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "Results and Discussion",
+    "text": "Results and Discussion\nThe dual 7-segment display responds properly to the keypad inputs. When multiple keys are pressed at once it registers the key pressed first and does not lock up. Additionally, when one key is held down and other keys are held down, the other inputs are ignored. The functioning system can be seen below!\n\n\nVideo\nFigure 5: Working debouncing!!!\n\n\n\nTestbench Simulation\nThe waveforms from the mux module simulation show that the mux is choosing the proper values for s[3:0], anode1, and anode2.\n\n\n\n\nFigure 6: This image shows the testbench results for the mux module that chooses the anode signals.\n\n\nThe waveforms for the 7-segment display verify that the proper pattern of segments are lit up in response to the 4-bit input. \n\n\n\nFigure 7: This image shows the testbench results for the 7-segment display module.\n\n\nThe waveforms for the scanner shows that the rows are changing, “scanning the keyboard”, in order to detect an input.\n\n\n\nFigure 8: The image shows the testbench results for the scanning module\n\n\nThe waveforms for the fsm shows that when the module receives a column input, it is properly cycling through the states of the finite state machine.\n\n\n\nFigure 9: The image shows the testbench results for the fsm module\n\n\nThe waveforms for the top level module shows that all the modules are properly connected and toggling between one another!\n\n\n\nFigure 10: The image shows the testbench results for the fsm module"
+  },
+  {
+    "objectID": "labs/lab3/lab3.html#conclusion",
+    "href": "labs/lab3/lab3.html#conclusion",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "Conclusion",
+    "text": "Conclusion\nThis lab took me around 20 hours. The majority of the time was debugging my keyboard hardware as well as my debouncing because I was registering multiple inputs when a key was held down for too long. One thing that I would suggest is to change the pinout for the first keyboard on the general lab website. I used that first keypad layout and trusted the pinouts on the website, and realized after some debugging that the pinouts were wrong. So one thing I learned is to always check the pinouts for connectivity!"
+  },
+  {
+    "objectID": "labs/lab3/lab3.html#ai-prototype-summary",
+    "href": "labs/lab3/lab3.html#ai-prototype-summary",
+    "title": "Lab 3: Keypad Scanner",
+    "section": "AI Prototype Summary",
+    "text": "AI Prototype Summary\nFor this AI Prototype, I prompted ChatGPT to write SystemVerilog through several different prompts. The first prompt was monolithic (giving all the information at once) and the second was modular (breaking down the steps). The monolithic prompt generated a full design quickly, but it often blurred module boundaries, produced synthesis errors, and required more debugging. Breaking the task into modular prompts gave cleaner FSMs, improved readability, and made it easier to verify each piece before integration. The LLM’s use of enumerated states, always_ff, and glitch-free outputs was helpful, though keypad code mapping and active-low polarity sometimes needed correction. Overall, modularizing the prompts improved correctness and workflow efficiency, and in the future I would explicitly separate FSM responsibilities and clarify signal conventions upfront."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Julia Gong",
+    "section": "",
+    "text": "My name is Julia Gong, and I an engineering student at Harvey Mudd College and a Clay Wolkin Research Fellow (co 2027). My research focuses on low-level computer architecture and processor design, including implementing the hypervisor extension for a RISC-V processor and developing verification tests across machine, supervisor, and user privilege modes. This fall, I will continue this work by designing and implementing a superscalar RISC-V processor to explore higher-performance execution and instruction-level parallelism.\nI did not come into college expecting to focus on hardware, but after taking a Digital Design and Computer Architecture course I found myself drawn to the logic and structure of how computers function from gate-level circuits to pipelined processors. I have always enjoyed creative, hands-on work — including pottery, embroidery, and beadwork — so I really enjoyed the creative process of designing finite state machines and building systems that interact on the microarchitectural level. I am interested in work that brings together low-level systems thinking with thoughtful design, and I’m continuing to explore where that intersection may lead!\nThis site includes my technical work from E155 (Microprocessor System Design & Applications) as well as some of my artwork. You can find all my E155 source code and research contributions on GitHub.\nFeel free to reach out to me at jgong@g.hmc.edu or using my Linkedin!"
+  },
+  {
+    "objectID": "project/fpga.html",
+    "href": "project/fpga.html",
+    "title": "FPGA Design",
+    "section": "",
+    "text": "The FPGA was in charge of processing the inputs sampled my the MCU using a 512 point FFT to extract the dominant frequency of each sample as well as displaying the detected notes on a musical score through VGA. The frequency outputs of the FFT was used to decode the corresponding note and duration of each sound input. The note and duration was then passed into the VGA module, which has a pixel resolution of 1024 x 600 and a refresh rate of 60z.\n\n\n\nFigure 1: This image shows the system level block digram of our FPGA design\n\n\n\n\nThe new hardware used was the VGA display. The top module of design would output a vsync and hsync to control the vertical and horizontal location of the beam and 3 - 1 bit color values for red, green, and blue.\nThe entire design uses 19 EBRs, 7 DSPs, and around 3800 LUTs. The entire design runs on a 12MHz clock, which is derived from the HSCOC. The PLL clock roughly doubles the clock to produce a frequency of 25.175MHz to control the VGA dispaly."
+  },
+  {
+    "objectID": "project/fpga.html#main-fpga-design",
+    "href": "project/fpga.html#main-fpga-design",
+    "title": "FPGA Design",
+    "section": "",
+    "text": "The FPGA was in charge of processing the inputs sampled my the MCU using a 512 point FFT to extract the dominant frequency of each sample as well as displaying the detected notes on a musical score through VGA. The frequency outputs of the FFT was used to decode the corresponding note and duration of each sound input. The note and duration was then passed into the VGA module, which has a pixel resolution of 1024 x 600 and a refresh rate of 60z.\n\n\n\nFigure 1: This image shows the system level block digram of our FPGA design\n\n\n\n\nThe new hardware used was the VGA display. The top module of design would output a vsync and hsync to control the vertical and horizontal location of the beam and 3 - 1 bit color values for red, green, and blue.\nThe entire design uses 19 EBRs, 7 DSPs, and around 3800 LUTs. The entire design runs on a 12MHz clock, which is derived from the HSCOC. The PLL clock roughly doubles the clock to produce a frequency of 25.175MHz to control the VGA dispaly."
+  },
+  {
+    "objectID": "project/fpga.html#fft-design",
+    "href": "project/fpga.html#fft-design",
+    "title": "FPGA Design",
+    "section": "FFT Design",
+    "text": "FFT Design\nThe Fast Fourier Transform transforms a signal from the time to frequency domain by recursively dividing a discrete fourier transform (DFT) into its odd and even indexed elements. The odd and even DFTs are of size N/2, where N is the size of its non-spit DFT. Using the symmetry and periodicity properties of complex exponentials, the even part corresponds to a half sized DFT and odd part corresponds to a half sized DFT that is multiplied by the twiddle factor (which is complex exponential expressed by \\(W_N\\)).\nThese equations below show the DFT and how the DFT can be split into its even and odd components.\nDFT equation: \\[\nX[k] = \\sum_{n=0}^{N-1} x[n] W_N^{kn}\n\\] DFT equation split into even and odd components: \\[\nX[k]  = \\sum_{m=0}^{\\frac{N}{2}-1} x[2m] W_N^{k(2m)}\n+ \\sum_{m=0}^{\\frac{N}{2}-1} x[2m+1] W_N^{k(2m+1)}\n\\] where \\[\nW_N = e^{-j \\frac{2\\pi}{N}}\n\\]\nUsing Radix-2 decompositions, an N point FFT can be computed through:\n\n\\(\\log_2(N)\\) levels of transforms\nEach transform has \\(N/2\\) butterfly operations\nA total of \\(\\frac{N}{2} \\log_2(N)\\) butterfly operations\n\nWe decided to use a 512 point FFT for higher resolution processing of our microphone inputs. Since N = 512, we would require:\n\n\\(\\log_2(512) = 9\\) levels of transforms\n\\(512/2 = 256\\) butterfly operations\ntotal of \\(\\frac{512}{2} \\log_2(512) = 2304\\) butterfly operations\n\nSince there was a limited amount of memory on our FPGA, we decided to use to calculate FFT on a 16 bit value, with 8 bit real and imaginary values.\nThe FFT design contains an address generation unit, and address control unit, a butterfly unit that houses a complex multiply unit, and 4 RAM blocks.\nThe design begins with loading 512 inputs into RAM0 (ram0_a and ram0_b), and asserts and fft_start signal once all inputs are loaded. The address generation unit then calculates the address of the input values and twiddle factors based on the fft level. The address generation unit calculates each butterfly address pair (a, b) through rotating the indicies, where i is the butterfly level and j is the address index, such that:\n\\[\na = Rotate_5(2j, i)\n\\] \\[\nb = Rotate_5(2j + 1, i)\n\\]\nThe address control unit that asserts commands to perform butterfly operations as well as memory read and write commands. The commands for writing and reading to RAM0 (ram0_a and ram0_b) and RAM1 (ram1_a and ram1_b) switch at every level. Since the system begins by loading the input data into RAM0, all the odd levels will read from RAM0 and write to RAM1 and all the even levels will read from RAM1 and write to RAM0. The proper a and b values are read from memory and input to the butterfly unit, and computes 8 bit real and imaginary values through the following equations, where TW is the corresponding twiddle value.\n\\[\nA' = A + B(TW) \\] \\[B' = A - B(TW) \\]\nThe complex butterfly outputs are written back into memory and read the next level. The outputs for the final FFT level are located in RAM0 (ram0_a and ram0_b) and an fft_done flag is asserted once the butterfly values of final level are fully calculated. The outputs of the level are then processed to extract the maximum k value and corresponding dominant frequency of the sample.\nThe memory blocks we were using contains a 2 cycle read delay. Therefore, we had to implement a 2 cycle stall to before calculating the butterfly values. More of the detailed internal stalling and pipelining of the FFT design can be seen in our Github Repository..\n\nFFT Block Diagram\n\n\n\nFigure 2: This image shows the blow diagram for the implementation of the FFT."
+  },
+  {
+    "objectID": "project/fpga.html#vga-design",
+    "href": "project/fpga.html#vga-design",
+    "title": "FPGA Design",
+    "section": "VGA Design",
+    "text": "VGA Design\nThe VGA design contains several facts that determine how the pixels are displayed on the monitor.\n\nFront Porch: time between end of the visible line and start of horizontal sync pulse allows electron beam to move from end of line to start of next\nHorizontal Sync Pulse: pulse that indicates line done scanning and sto start next\nBack porch: time after horizontal sync pulse and before start of visible line allows electron beam to stabilize before drawing next line\nVisible area: area where line is scanned\n\nThe VGA top module is split into the Phase-Locked Loop (PLL) which generates the proper clock speed for VGA, the VGA control module, which generates the horizontal and vertical sync signals based on our pixel resolution, and a music score module which draws the score lines, treble clef, and notes.\n\n\n\nFigure 3: This image shows the oscilloscope trace of our PLL clock\n\n\nThe music score module displays the score in a fixed pixel location, so that calculations for the treble clef and note locations are dependent on the score location. The pixel layout for the treble cleff and music notes are stored in a memory file. The treble clef is 40x80 pixels and the notes are each 30x60 pixels. The note memories contain pixels layouts for eighth, quarter, half, and whole notes with and without sharps. The eighth, quarter, and half notes also contain pixel layouts for the stem up and stem down. To calculate the note location, the octave and semitone of each note is compared to the known location for B4 (third line on the score). The stem direction of each note is also calculated in comparison the B4, where notes above B4 will have a downwards stem and those lower on the lower half will have an upwards stem. Additionally, if the note location is calculated as above or below the score, a small ledger will also be included in the note display to properly format the note.\n\nVGA Display\n\n\n\nFigure 4: This image shows the score the monitor.\n\n\n\n\n\nFIgure 5: This image shows notes on the debugging of notes on the monitor"
+  },
+  {
+    "objectID": "project/results.html",
+    "href": "project/results.html",
+    "title": "Results",
+    "section": "",
+    "text": "The original proposed specifications are listed here. Note that the playback specs are deleted after consulting Prof. Spencer on downscaling the project.\n\n\n\nUser can stop and start transcription using physical hardware (e.g. switch/button)\nSystem converts analog microphone signals into digital\nUses FFT to extract clear signal from input\nSystem calculates input frequency and rounds to the nearest half note (e.g. A3#, C4)\nSystem able to detect duration accurate to 1/16 beat at the given BPM\n\n\n\n\n\nDisplay updates at &gt; 24 Hz\nNote durations are displayed for 120 BPM\nNotes are displayed on VGA monitor ~75 ms after note is released\nPlayback audio resembles the input\nPlayback audio uses an audio codec so that output sound is not square wave\nUser can control the volume of playback audio\nUser can control when to playback the transcribed audio (e.g. switch/button), but can only play the audio when transcription is stopped"
+  },
+  {
+    "objectID": "project/results.html#project-specifications-list",
+    "href": "project/results.html#project-specifications-list",
+    "title": "Results",
+    "section": "",
+    "text": "The original proposed specifications are listed here. Note that the playback specs are deleted after consulting Prof. Spencer on downscaling the project.\n\n\n\nUser can stop and start transcription using physical hardware (e.g. switch/button)\nSystem converts analog microphone signals into digital\nUses FFT to extract clear signal from input\nSystem calculates input frequency and rounds to the nearest half note (e.g. A3#, C4)\nSystem able to detect duration accurate to 1/16 beat at the given BPM\n\n\n\n\n\nDisplay updates at &gt; 24 Hz\nNote durations are displayed for 120 BPM\nNotes are displayed on VGA monitor ~75 ms after note is released\nPlayback audio resembles the input\nPlayback audio uses an audio codec so that output sound is not square wave\nUser can control the volume of playback audio\nUser can control when to playback the transcribed audio (e.g. switch/button), but can only play the audio when transcription is stopped"
+  },
+  {
+    "objectID": "project/results.html#specifications-result",
+    "href": "project/results.html#specifications-result",
+    "title": "Results",
+    "section": "Specifications Result",
+    "text": "Specifications Result\nHere, we will explain the specs that are met by the project:\n\nUser can stop and start transcription using physical hardware (e.g. switch/button)\nThe system includes a button which signals the MCU to start and stop transcribing.\nSystem converts analog microphone signals into digital\nThe ADC on the MCU worked, and we were able to obtain digital signals from the SPI. A logic analyzer result of the SPI transferring microphone signal is shown here:\n\n\n\nSPI logic analyzer result\n\n\nThe mosi signals mostly sits around 80 because the microphone’s quinscient voltage sits at have the voltage supplied.\nUses FFT to extract clear signal from input\nWe were able to use FFT to extract signals and output notes detected. This is especially successful in simulation. In hardware, the system experiences instability due to the amount of environmental noises.\nSystem calculates input frequency and rounds to the nearest half note (e.g. A3#, C4)\nBuilding on the previous spec, the FFT was able to clearly distinguish note, octave, and sharp in simulation. In hardware, it was also able to output certain notes.\nSystem able to detect duration accurate to 1/16 beat at the given BPM\nThe constraint of the system had to be changed to 1/2 of the beat due to the downscale of sampling rate.\nDisplay updates at &gt; 24 Hz\nThe VGA is refreshing at a rate of 60 Hz.\nNote durations are displayed for 120 BPM\nDue to the limited memory on our FPGA, we did not have enough memory to store 16 bits and sample at the desired frequency to capture 8th notes at 120BPM. To work with the amount of memory that we had, we decided to lower the resolution of the inputs to 8 bits so that we could calculate whole number k values that correspond to a note in a two octave range.\nNotes are displayed on VGA monitor ~75 ms after note is released\nOnly notes that fall under a select magnitude will be processed and displayed. The note magnitude was set in place in order to avoid background noise."
+  },
+  {
+    "objectID": "project/results.html#testbenches",
+    "href": "project/results.html#testbenches",
+    "title": "Results",
+    "section": "Testbenches",
+    "text": "Testbenches\nBefore hardware implementation, the top level module of the FFT, fft_ctrl, was tested with a testbench which takes a generated ideal bitstream data, and input into the system bit by bit. This simulates the SPI transfer action in real hardward, and as shown in the picture, the FFT was able to produce a a stable note D5#, or db in with our defined encodings.\n\n\n\nWaveform of fft_ctrl testbench\n\n\nEach modules within the FFT, including fftfull, addgen, etc., are tested by separate testbench too."
+  },
+  {
+    "objectID": "project/results.html#note-display",
+    "href": "project/results.html#note-display",
+    "title": "Results",
+    "section": "Note Display",
+    "text": "Note Display\n\n\nNote: The aliasing seen in the video is not on the VGA monitor, but occurs when recording a video on a phone since the VGA display is refreshing at 60Hz and the phone is recording at a lower frequency."
+  },
+  {
+    "objectID": "project/mcu.html",
+    "href": "project/mcu.html",
+    "title": "MCU Design",
+    "section": "",
+    "text": "The main purpose of the MCU in this project, STM32L432KC, is to serve as the front-end data acquisition system for the music transcriber. Utilizing a hardware timer triggered Analog-to-Digital Converter (ADC) with double buffers, the system samples analog audio signals, convert them to digital signals, and transmit data packets to the FPGA via SPI. After setting up the required peripherals, the MCU operates in two states, idle and sampling, where the sampling state is triggered and stopped by a button press on the user’s end."
+  },
+  {
+    "objectID": "project/mcu.html#overview",
+    "href": "project/mcu.html#overview",
+    "title": "MCU Design",
+    "section": "",
+    "text": "The main purpose of the MCU in this project, STM32L432KC, is to serve as the front-end data acquisition system for the music transcriber. Utilizing a hardware timer triggered Analog-to-Digital Converter (ADC) with double buffers, the system samples analog audio signals, convert them to digital signals, and transmit data packets to the FPGA via SPI. After setting up the required peripherals, the MCU operates in two states, idle and sampling, where the sampling state is triggered and stopped by a button press on the user’s end."
+  },
+  {
+    "objectID": "project/mcu.html#data-acquisition-architecture",
+    "href": "project/mcu.html#data-acquisition-architecture",
+    "title": "MCU Design",
+    "section": "Data Acquisition Architecture",
+    "text": "Data Acquisition Architecture\n\nADC Initialization & Interrupts\nThe ADC is configured for non-continuous mode and triggered externally by the hardware timer TIM6. The FFT algorithm assumes that the time difference between every single sample is identical. In continuous mode, the ADC samples continuously, starting the next conversion immediately as the previous one finished. Therefore, the sampling time is dependent on internal ADC settings, such as the ADC clock and calibration cycles, making it hard to ensure that the time between samples stay constant and to obtain the sampling frequency. However, by using the non-continuous mode and a timer, the MCU can be set to a desired sampling rate.\nThe trigger source of the ADC, TIM6, is set to toggle at a frequency of 5 kHz. As the ADC is set to trigger on the rising edge of this timer using Timer 6 TRGO (EXTSEL = 13), a sampling rate of 5 kHz. One important factor in FFT is the frequency resolution, which can be calculated as:\n\\[\nResolution = \\frac{Sampling Rate}{FFT Size}\n\\]\nGiven that the system uses a 512-point FFT, a higher sampling rate, despite providing more resolution to the original sound signal, would in fact decrease the accuracy of the FFT results. On the other hand, by the Nyquist-Shannon sampling theorem, the sampling rate would limit the highest frequency detectable to be half of the sampling rate. The high C (C6), which is a very high soprano note and hardly appears in pop music melodies, is approximately 1046 Hz. Balancing between the highest frequency detectable, number of data points per period, and the FFT resolution, the sampling rate of the system was decided as 5 kHz.\nThe resolution of the ADC samples are set to 8-bit instead of the normal 12-bit. The complexity of the math logic gates scales with bit depth on the FPGA. While the iCE40UP5K has DSP blocks, the number of bits of addition and multiplication results quickly grows, and may eventually overflow. Adding more bits to the logics in FPGA was not practical due to the restrictions of resource in the FPGA. 8-bit data would also perfectly fit into one SPI transmission without any extra bits, making the logic of receiving data on the FPGA easier.\n\n\nDouble Buffering\nTo prevent data loss during the time it takes to transmit data to the FPGA, a double-buffereing method was implemented. Each buffer, buffer0 and buffer1, are set to be 512-byte arrays. fillBuffer acts as a pointer to the array currently being written to by the ADC, and sendBuffer points to the array currently stable and ready for SPI transmission. When the ADC fills fillBuffer with 512 samples, the interrupt handler swaps the pointers and raises a bufferReady flag. The main loop detects this flag and begins transmitting sendBuffer via SPI while the ADC immediately begins writing to the new fillBuffer in the background.\nOn the other hand, while the STM32 supports Direct Memory Access (DMA), the CPU overhead for processing 5 kHz interrupts is negligible, making the complexity of configuring DMA unnecessary for performance. Additionally, using a standard interrupt allows for simpler, explicit control over the double-buffer pointer swapping logic and easier real-time debugging through GPIO toggles."
+  },
+  {
+    "objectID": "project/mcu.html#spi-communication",
+    "href": "project/mcu.html#spi-communication",
+    "title": "MCU Design",
+    "section": "SPI Communication",
+    "text": "SPI Communication\nThe communication between the MCU and the FPGA is established using the SPI, where the MCU acts as the SPI Master. To ensure synchronization with the FPGA, the Chip Select (CS) line is toggled manually for every byte transmitted. This provides a clear signal for each new “sample” which the FPGA receives.\nA logic analyzer result of the SPI transferring the microphone signal is shown here:\n\n\n\nSPI logic analyzer result"
+  }
+]

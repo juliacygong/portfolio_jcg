@@ -1,0 +1,121 @@
+---
+title: "Artwork"
+toc: false
+page-layout: full
+---
+
+```{=html}
+<div class="art-intro">
+```
+
+Returning to the studio after working on a delicate coil sculpture until 5am, my heart sank when I saw it had collapsed. Ceramics is unforgiving as clay shifts, molds, and remembers every touch. Yet confronting my perfectionism through ceramics has been central to developing my patience and resilience. Early failures building and wheel throwing frustrated me, but the process taught me to turn disappointment into experimentation and to value process over outcome. I am constantly reminded that my growth, like any piece I've made, requires constant reshaping, reflection, and the willingness to start again.
+
+This selection of pieces are both a reflection of my identity but also growth.
+
+```{=html}
+</div>
+
+<div class="gallery-container">
+
+  <!-- Row 1: bio (3 images, spans all 3 columns) -->
+  <div class="gallery-group span-3">
+    <div class="group-images">
+      <img src="art%20images/bio1.JPG" alt="bio">
+      <img src="art%20images/bio2.JPG" alt="bio">
+      <img src="art%20images/bio3.JPG" alt="bio">
+    </div>
+    <p class="gallery-caption">The World. Abstract Biomorphic Sculpture 24 inches. Made with coils.</p>
+  </div>
+
+  <!-- Row 2: crane_bowl (2 cols) | mooncake (1 col) -->
+  <div class="gallery-group span-2">
+    <div class="group-images">
+      <img src="art%20images/crane_bowl.JPG" alt="crane bowl">
+      <img src="art%20images/crane_bowl2.JPG" alt="crane bowl">
+    </div>
+    <p class="gallery-caption">Crane Bowls. Wheel Thrown and Painted</p>
+  </div>
+  <div class="gallery-item">
+    <img src="art%20images/mooncake.JPG" alt="mooncake">
+    <p class="gallery-caption">Mooncake Jars. Handbuilt and Carved.</p>
+  </div>
+
+  <!-- Row 3: comb (2 cols) | panda_cup (1 col) -->
+  <div class="gallery-group span-2">
+    <div class="group-images">
+      <img src="art%20images/comb1.JPG" alt="comb">
+      <img src="art%20images/comb2.JPG" alt="comb">
+    </div>
+    <p class="gallery-caption">Bone Comb. Handbuilt and Reduction Fired with Iron Oxide Wash.</p>
+  </div>
+  <div class="gallery-item">
+    <img src="art%20images/panda_cup.JPG" alt="panda cup">
+    <p class="gallery-caption">Panda Whisk Holder. Wheel Thrown and Painted.</p>
+  </div>
+
+  <!-- Row 4: skeletal (2 cols) | panda_dish (1 col) -->
+  <div class="gallery-group span-2">
+    <div class="group-images">
+      <img src="art%20images/skeletal1.JPG" alt="skeletal">
+      <img src="art%20images/skeletal2.JPG" alt="skeletal">
+    </div>
+    <p class="gallery-caption">Hold On. Abstract Skeletal Structure. Handbuilt 22 inches. This is the second skeletal structure I made after the first collapsed.</p>
+  </div>
+  <div class="gallery-item">
+    <img src="art%20images/panda_dish.JPG" alt="panda dish">
+    <p class="gallery-caption">Panda Dish. Wheel Thrown and Painted.</p>
+  </div>
+
+  <!-- Row 5: inter (2 cols) | flower_bowl (1 col) -->
+  <div class="gallery-group span-2">
+    <div class="group-images">
+      <img src="art%20images/inter1.JPG" alt="inter">
+      <img src="art%20images/inter2.JPG" alt="inter">
+    </div>
+    <p class="gallery-caption">Mirror, a piece for interpersonal connection. Handbuilt.</p>
+  </div>
+  <div class="gallery-item">
+    <img src="art%20images/flower_bowl.JPG" alt="flower bowl">
+    <p class="gallery-caption">Flower Bowl. Wheel Thrown and Painted.</p>
+  </div>
+
+  <!-- Row 6: 3 singles -->
+  <div class="gallery-item">
+    <img src="art%20images/zodiac_bowl.JPG" alt="zodiac bowl">
+    <p class="gallery-caption">Zodiac Bowl. Wheel Thrown and Painted.</p>
+  </div>
+  <div class="gallery-item">
+    <img src="art%20images/dragon_bowl.JPG" alt="dragon bowl">
+    <p class="gallery-caption">Dragon Bowl. Wheel Thrown and Carved.</p>
+  </div>
+  <div class="gallery-item">
+    <img src="art%20images/dragonbowls.JPG" alt="dragon bowls">
+    <p class="gallery-caption">Dragon China Bowls. Wheel Thrown and Carved</p>
+  </div>
+
+  <!-- Row 7: 3 singles -->
+  <div class="gallery-item">
+    <img src="art%20images/mahjong_cups.JPG" alt="mahjong cups">
+    <p class="gallery-caption">Mahjong Cups. Wheel Thrown, Carved, and Painted.</p>
+  </div>
+  <div class="gallery-item">
+    <img src="art%20images/teapot.JPG" alt="teapot">
+    <p class="gallery-caption">Kyusu Teapot. Wheel Thrown and Painted.</p>
+  </div>
+  <div class="gallery-item">
+    <img src="art%20images/bow_dumbler.JPG" alt="bow dumbler">
+    <p class="gallery-caption">Lucky Charm Tumbler. Wheel Thrown and Handbuilt.</p>
+  </div>
+
+  <!-- Row 8: 2 singles -->
+  <div class="gallery-item">
+    <img src="art%20images/vase.JPG" alt="vase">
+    <p class="gallery-caption">Cherry Blossom Vase. Wheel Thrown and Handbuilt.</p>
+  </div>
+  <div class="gallery-item">
+    <img src="art%20images/crane_tumbler.JPG" alt="crane tumbler">
+    <p class="gallery-caption">Crane Tumbler. Wheel Thrown and Painted.</p>
+  </div>
+
+</div>
+```
