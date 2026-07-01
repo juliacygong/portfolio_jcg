@@ -1,0 +1,98 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+---
+
+<ProjectLayout title="FPGA Design" activeSlug="fpga">
+  <h2>Main FPGA Design</h2>
+  <p>
+    The FPGA processes MCU-sampled inputs using a 512-point FFT to extract the dominant frequency of each
+    sample, then displays detected notes on a music score via VGA (1024×600 pixels, 60Hz refresh).
+    Frequency outputs of the FFT are decoded into corresponding notes and durations, passed into the VGA module.
+  </p>
+  <figure>
+    <img src="/images/project/top_bd1.png" alt="FPGA system block diagram" />
+    <figcaption>Figure 1: System-level block diagram of the FPGA design.</figcaption>
+  </figure>
+  <p>
+    Resource usage: 19 EBRs, 7 DSPs, ~3800 LUTs. The design runs on a 12MHz clock from the HSOSC.
+    A PLL roughly doubles this to 25.175MHz for VGA control.
+  </p>
+
+  <h2>FFT Design</h2>
+  <p>
+    The Fast Fourier Transform converts a signal from the time to frequency domain by recursively dividing
+    a DFT into its odd and even indexed elements. Using Radix-2 decomposition, an N-point FFT requires
+    log₂(N) levels, each with N/2 butterfly operations.
+  </p>
+  <p>For our 512-point FFT (N = 512):</p>
+  <ul>
+    <li>log₂(512) = 9 levels</li>
+    <li>256 butterfly operations per level</li>
+    <li>2304 total butterfly operations</li>
+  </ul>
+  <p>
+    Due to limited FPGA memory, the FFT computes on 16-bit values (8-bit real + 8-bit imaginary).
+  </p>
+
+  <h3>Architecture</h3>
+  <p>
+    The FFT design contains an address generation unit, an address control unit, a butterfly unit with a
+    complex multiply unit, and 4 RAM blocks.
+  </p>
+  <p>
+    The design begins by loading 512 inputs into RAM0. Once all inputs are loaded, <code>fft_start</code>
+    is asserted. The address generation unit calculates butterfly addresses per level:
+  </p>
+  <ul>
+    <li><em>a</em> = Rotate₅(2j, i)</li>
+    <li><em>b</em> = Rotate₅(2j + 1, i)</li>
+  </ul>
+  <p>
+    The address control unit alternates RAM reads/writes: odd levels read RAM0 → write RAM1; even levels
+    read RAM1 → write RAM0. Butterfly outputs use:
+  </p>
+  <ul>
+    <li>A' = A + B(TW)</li>
+    <li>B' = A − B(TW)</li>
+  </ul>
+  <p>
+    After the final level, <code>fft_done</code> is asserted. Results in RAM0 are processed to extract
+    the maximum k value and dominant frequency. A 2-cycle RAM read delay required a 2-cycle stall before
+    butterfly calculations.
+  </p>
+
+  <h3>FFT Block Diagram</h3>
+  <figure>
+    <img src="/images/project/fft_block.png" alt="FFT block diagram" />
+    <figcaption>Figure 2: Block diagram for the FFT implementation.</figcaption>
+  </figure>
+
+  <h2>VGA Design</h2>
+  <p>
+    The VGA top module is split into:
+  </p>
+  <ul>
+    <li><strong>PLL</strong> — generates 25.175MHz clock for VGA</li>
+    <li><strong>VGA control module</strong> — generates hsync and vsync signals</li>
+    <li><strong>Music score module</strong> — draws score lines, treble clef, and notes</li>
+  </ul>
+  <figure>
+    <img src="/images/project/pll.jpg" alt="PLL oscilloscope trace" />
+    <figcaption>Figure 3: Oscilloscope trace of PLL clock.</figcaption>
+  </figure>
+  <p>
+    The treble clef (40×80 pixels) and notes (30×60 pixels each) are stored in memory files. Note variants
+    include eighth, quarter, half, and whole notes with and without sharps, in stem-up and stem-down
+    orientations. Note position is calculated relative to B4 (third score line). Notes above B4 get
+    downward stems; notes below get upward stems. Ledger lines are added automatically when notes fall
+    above or below the staff.
+  </p>
+  <figure>
+    <img src="/images/project/score1.jpg" alt="VGA score display" />
+    <figcaption>Figure 4: Score on the VGA monitor.</figcaption>
+  </figure>
+  <figure>
+    <img src="/images/project/score2.jpg" alt="VGA note debugging" />
+    <figcaption>Figure 5: Note display debugging on the VGA monitor.</figcaption>
+  </figure>
+</ProjectLayout>

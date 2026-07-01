@@ -1,0 +1,57 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+---
+
+<ProjectLayout title="MCU Design" activeSlug="mcu">
+  <h2>Overview</h2>
+  <p>
+    The STM32L432KC serves as the front-end data acquisition system. Using a hardware timer-triggered ADC
+    with double buffering, it samples analog audio, converts to digital, and transmits data packets to the
+    FPGA via SPI. After peripheral setup, the MCU operates in two states: idle and sampling — toggled by
+    a button press.
+  </p>
+
+  <h2>Data Acquisition Architecture</h2>
+
+  <h3>ADC Initialization &amp; Interrupts</h3>
+  <p>
+    The ADC runs in non-continuous mode, triggered externally by TIM6. Continuous mode makes it hard to
+    ensure constant sample spacing; using a timer gives precise control over the sampling rate.
+  </p>
+  <p>
+    TIM6 triggers at 5kHz (<code>EXTSEL = 13</code>, rising-edge trigger). Sampling rate is chosen by
+    balancing three factors:
+  </p>
+  <ul>
+    <li><strong>FFT resolution</strong> = Sampling Rate / FFT Size — higher rate reduces frequency resolution</li>
+    <li><strong>Nyquist limit</strong> — max detectable frequency = Fs / 2; high C (C6) ≈ 1046Hz</li>
+    <li><strong>Data points per period</strong> — more samples per note improves accuracy</li>
+  </ul>
+  <p>
+    ADC resolution is set to 8-bit (not the standard 12-bit) because: (1) math logic complexity scales
+    with bit depth on the FPGA; (2) 8-bit data fits cleanly into one SPI transmission.
+  </p>
+
+  <h3>Double Buffering</h3>
+  <p>
+    To prevent data loss during SPI transmission, two 512-byte buffers (<code>buffer0</code>, <code>buffer1</code>)
+    are used. <code>fillBuffer</code> points to the array being written by the ADC; <code>sendBuffer</code>
+    points to the stable array ready for SPI. When the ADC fills <code>fillBuffer</code>, the interrupt handler
+    swaps pointers and raises a <code>bufferReady</code> flag. The main loop detects this and begins
+    transmitting while the ADC writes to the new <code>fillBuffer</code>.
+  </p>
+  <p>
+    DMA was not used — CPU overhead for 5kHz interrupts is negligible, and standard interrupts allow
+    simpler, explicit control over pointer swapping and easier real-time debugging via GPIO toggles.
+  </p>
+
+  <h2>SPI Communication</h2>
+  <p>
+    The MCU acts as SPI Master. The Chip Select (CS) line is toggled manually for every byte to provide
+    a clear signal for each sample received by the FPGA.
+  </p>
+  <figure>
+    <img src="/images/project/spi_result.jpeg" alt="SPI logic analyzer result" />
+    <figcaption>Logic analyzer result of SPI transferring the microphone signal.</figcaption>
+  </figure>
+</ProjectLayout>

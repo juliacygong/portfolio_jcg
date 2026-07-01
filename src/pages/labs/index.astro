@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const labs = [
+  {
+    num: 1,
+    title: 'FPGA and MCU Setup',
+    desc: 'Soldered the development board and programmed the FPGA with Verilog to drive DIP switch inputs, LEDs, and a 7-segment display.',
+    tags: ['Verilog', 'FPGA', 'Soldering'],
+  },
+  {
+    num: 2,
+    title: 'Multiplexed 7-Segment Display',
+    desc: 'Used time multiplexing to drive two 7-segment displays from a single set of FPGA I/O pins, with PNP transistors and an LED sum display.',
+    tags: ['Verilog', 'FPGA', 'Time Multiplexing'],
+  },
+  {
+    num: 3,
+    title: 'Keypad Scanner',
+    desc: 'Designed an FSM to debounce a 4×4 keypad and display the last two key presses on a dual 7-segment display.',
+    tags: ['Verilog', 'FSM', 'Debouncing'],
+  },
+  {
+    num: 4,
+    title: 'Digital Audio',
+    desc: 'Used MCU timers to generate square waves at specific frequencies, building a C library from scratch to play melodies.',
+    tags: ['C', 'STM32', 'Timers', 'PWM'],
+  },
+  {
+    num: 5,
+    title: 'Interrupts',
+    desc: 'Calculated motor speed and direction from a quadrature encoder using GPIO and timer interrupts on the STM32.',
+    tags: ['C', 'STM32', 'Interrupts', 'Encoders'],
+  },
+  {
+    num: 6,
+    title: 'IoT and SPI',
+    desc: 'Built an IoT device with a temperature sensor over SPI and an ESP8266 web interface over UART.',
+    tags: ['C', 'SPI', 'UART', 'IoT'],
+  },
+];
+---
+
+<BaseLayout title="E155 Labs" description="Microprocessor System Design lab write-ups">
+  <div class="labs-page container">
+    <div class="chapter-divider" style="margin-top: 3rem;"><span>E155 Labs</span></div>
+    <p class="labs-intro">
+      Lab write-ups from E155: Microprocessor System Design &amp; Applications at Harvey Mudd College.
+      Each lab explores a core concept in embedded systems using an FPGA (UPduino v3.1) and MCU (STM32L432KC).
+    </p>
+
+    <div class="labs-grid">
+      {labs.map(lab => (
+        <a href={`/labs/lab${lab.num}`} class="lab-card">
+          <div class="lab-card__num">Lab {lab.num}</div>
+          <h2 class="lab-card__title">{lab.title}</h2>
+          <p class="lab-card__desc">{lab.desc}</p>
+          <div class="lab-card__tags">
+            {lab.tags.map(t => <span class="tag">{t}</span>)}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .labs-page { padding: 2rem 2rem 4rem; }
+
+  .labs-intro {
+    font-size: 0.95rem;
+    color: var(--gray);
+    max-width: 680px;
+    margin-bottom: 2.5rem;
+  }
+
+  .labs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .lab-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    border: 2px solid var(--wine);
+    border-radius: 0;
+    padding: 1.75rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    color: var(--text);
+  }
+  .lab-card:hover {
+    box-shadow: 0 6px 24px rgba(123, 45, 62, 0.15);
+    transform: translateY(-3px);
+  }
+
+  .lab-card__num {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 0.8rem;
+    color: var(--wine);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .lab-card__title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .lab-card__desc {
+    font-size: 0.9rem;
+    color: var(--gray);
+    flex: 1;
+    margin-bottom: 1rem;
+  }
+
+  .lab-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-size: 0.78rem;
+    font-family: 'Times New Roman', Times, serif;
+    background: var(--bg);
+    border: 1px solid var(--wine);
+    color: var(--wine);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0;
+  }
+</style>

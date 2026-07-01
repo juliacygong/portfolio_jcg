@@ -1,0 +1,113 @@
+---
+import LabLayout from '../../layouts/LabLayout.astro';
+---
+
+<LabLayout title="Lab 1: FPGA and MCU Setup and Testing" labNum={1} githubUrl="https://github.com/juliacygong/E155/tree/main/lab01">
+  <section>
+    <h2>Introduction</h2>
+    <p>
+      In Lab 1, a <a href="https://hmc-e155.github.io/assets/doc/E155%20Development%20Board%20Schematic.pdf" target="_blank" rel="noopener">development board</a> containing
+      a FPGA (UPduino v3.1) and MCU (mikroBUS_Socket) was soldered together. The objective was to program
+      the FPGA with Verilog code that responds to 4 input DIP switches and outputs a specific seven segment
+      display as well as three LED displays. Other learning outcomes included soldering, testing, and debugging
+      circuits and Verilog.
+    </p>
+
+    <h2>FPGA Design and Testing Methodology</h2>
+    <p>
+      The following tables establish the relationship between the various inputs and outputs on the development board.
+    </p>
+    <figure>
+      <img src="/images/labs/lab1/lab1_table1.png" alt="Table of inputs and outputs" />
+      <figcaption>Figure 1: Inputs and outputs required in the FPGA design.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab1/lab1_table2.png" alt="DIP switch to LED mapping" />
+      <figcaption>Figure 2: Relationship between DIP switch inputs and LED outputs.</figcaption>
+    </figure>
+    <p>
+      The design was developed using a clock divider, boolean algebra, and multiplexers. The clock divider creates
+      the 2.4Hz oscillating LED, boolean algebra selects between DIP switch signals to determine other LED outputs,
+      and multiplexers select the corresponding segment outputs for the 7-segment display. The 7-segment display
+      shows all hexadecimal digits distinctly.
+    </p>
+    <p>
+      The 7-segment display has a common anode — the cathode must be grounded to turn on an LED. Therefore the
+      Verilog sends <code>0</code> to turn on a segment and <code>1</code> to turn off a segment.
+    </p>
+
+    <h3>Hardware Implementation</h3>
+    <figure>
+      <img src="/images/labs/lab1/board.jpg" alt="Completed development board" />
+      <figcaption>Figure 3: The completed development board.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab1/breadboard.png" alt="Breadboard layout" />
+      <figcaption>Figure 4: Physical breadboard layout of the 7-segment display.</figcaption>
+    </figure>
+    <p>
+      The resistors used in the 7-segment display were determined by looking at the segment luminous intensity
+      and voltage drop in the datasheet. The desired current is 10mA and the voltage drop per segment is 2.1V.
+      With a 3.3V supply: V = 3.3V − 2.1V = 1.2V → R = 120Ω. I used 220Ω resistors to ensure appropriate
+      current draw.
+    </p>
+
+    <h2>Technical Documentation</h2>
+    <p>
+      Source code is in my <a href="https://github.com/juliacygong/E155/tree/main/lab01" target="_blank" rel="noopener">GitHub repository</a>.
+      It contains two Verilog modules, 2 testbenches, and 2 testvector files.
+    </p>
+
+    <h3>Block Diagram</h3>
+    <figure>
+      <img src="/images/labs/lab1/lab1_blockdiagram.jpeg" alt="Block diagram" />
+      <figcaption>Figure 5: Block diagram for the two Verilog modules.</figcaption>
+    </figure>
+
+    <h3>Schematic</h3>
+    <figure>
+      <img src="/images/labs/lab1/lab1_schematic.jpeg" alt="Schematic" />
+      <figcaption>Figure 6: Schematic for the FPGA and 7-segment display.</figcaption>
+    </figure>
+
+    <h2>Results and Discussion</h2>
+    <p>
+      Results were verified using an automatic testbench simulation on Questa and an oscilloscope trace to
+      verify the LED oscillating frequency.
+    </p>
+    <figure>
+      <img src="/images/labs/lab1/lab1_waveforms.png" alt="Testbench waveforms" />
+    </figure>
+    <figure>
+      <img src="/images/labs/lab1/lab1_results.png" alt="Testbench results" />
+      <figcaption>Figure 7: Testbench simulation results from Questa. All 16 tests passed with no errors.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab1/lab1_oscilloscope.JPG" alt="Oscilloscope trace" />
+      <figcaption>Figure 8: Oscilloscope trace of the LED at 2.4Hz (measured frequency matches desired).</figcaption>
+    </figure>
+
+    <h2>Conclusion</h2>
+    <p>
+      The design meets all lab requirements. The development board is fully assembled and all outputs
+      for the 7-segment display and LEDs match expected outputs. All hexadecimal digits display uniquely
+      and each segment has the same brightness.
+    </p>
+    <p>
+      I spent a total of 15 hours on this lab. A large portion was spent soldering and learning
+      the Lattice Radiant environment. A useful tip: learn how to navigate the "FTDI Error" that
+      occurs when trying to program the FPGA — the lab description could have mentioned this.
+    </p>
+
+    <h2>AI Prototype Summary</h2>
+    <p>
+      Prompt given to ChatGPT: <em>Write SystemVerilog HDL to leverage the internal high speed oscillator
+      in the Lattice UP5K FPGA and blink an LED at 2 Hz.</em>
+    </p>
+    <p>
+      The generated code included several unnecessary local parameters and the logic could be
+      simplified. With more specific guidance, ChatGPT produced better code in a follow-up prompt.
+      Full transcript: <a href="https://chatgpt.com/share/68b7add1-90c8-800e-8b15-9c966d711eab" target="_blank" rel="noopener">chatgpt.com/share/…</a>
+    </p>
+  </section>
+</LabLayout>

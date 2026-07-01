@@ -1,0 +1,138 @@
+---
+import LabLayout from '../../layouts/LabLayout.astro';
+---
+
+<LabLayout title="Lab 3: Keypad Scanner" labNum={3} githubUrl="https://github.com/juliacygong/E155/tree/main/lab03">
+  <section>
+    <h2>Introduction</h2>
+    <p>
+      The purpose of this lab was to debounce signals from key presses on a 4×4 keyboard. The last two inputs
+      pressed are displayed on a dual 7-segment display. The display does not lock up if multiple keys are
+      pressed simultaneously, and ignores other inputs when one key is held down.
+    </p>
+
+    <h2>FPGA Design and Testing Methodology</h2>
+    <p>
+      I designed an FSM to debounce the keyboard properly. This lab focused on synchronous sequential logic —
+      synchronizing column inputs and tracking what clock cycles specific values update at.
+    </p>
+    <p>
+      The dual 7-segment display from Lab 2 was reused (same clock divider, hardware layout, and submodules).
+    </p>
+
+    <h3>Hardware Implementation</h3>
+    <figure>
+      <img src="/images/labs/lab3/lab3_board.jpg" alt="Breadboard layout" />
+      <figcaption>Figure 1: Breadboard layout of the dual 7-segment display with the 4×4 keyboard.</figcaption>
+    </figure>
+    <p>
+      Components: development board, 4×4 keypad, dual 7-segment display, two 2N3906 PNP transistors.
+    </p>
+    <p>
+      Current-limiting resistors for keypad pins: V = 3.3V, I = 8mA → R = 410Ω. Used 510Ω resistors.
+    </p>
+
+    <h2>Technical Documentation</h2>
+    <p>
+      Source code in <a href="https://github.com/juliacygong/E155/tree/main/lab03" target="_blank" rel="noopener">GitHub</a>:
+      top module, all submodules, and testbenches.
+    </p>
+
+    <h3>FSM Design</h3>
+    <p>
+      I chose FSM + counters over hardware RC circuits (more flexible, tunable in code) and over shift-register
+      oversampling (fewer flip-flops, integrates naturally with the keypad state machine). The tradeoff: very brief
+      taps shorter than the debounce window may be missed — acceptable for human inputs.
+    </p>
+    <figure>
+      <img src="/images/labs/lab3/lab3_fsm.png" alt="FSM diagram" />
+      <figcaption>Figure 2: FSM used to debounce key inputs (6 states).</figcaption>
+    </figure>
+
+    <h3>FSM State Transition Table</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Current State</th>
+          <th>Input Condition</th>
+          <th>Next State</th>
+          <th>Outputs (row_stop, key_valid, reset_count)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>WAIT</td><td>key_col != 0 &amp;&amp; one-hot &amp;&amp; key_val[7:4] != 0</td><td>INPUT</td><td>1, 0, 0</td></tr>
+        <tr><td>WAIT</td><td>otherwise</td><td>WAIT</td><td>0, 0, 0</td></tr>
+        <tr><td>INPUT</td><td>(always)</td><td>INPUT_WAIT</td><td>1, 0, 0</td></tr>
+        <tr><td>INPUT_WAIT</td><td>counter[2] == 1</td><td>HOLD</td><td>1, 1, 1</td></tr>
+        <tr><td>INPUT_WAIT</td><td>otherwise</td><td>INPUT_WAIT</td><td>1, 0, 1</td></tr>
+        <tr><td>HOLD</td><td>key_col == 0</td><td>DEBOUNCE</td><td>1, 0, 0</td></tr>
+        <tr><td>HOLD</td><td>otherwise</td><td>HOLD</td><td>1, 0, 0</td></tr>
+        <tr><td>DEBOUNCE</td><td>(always)</td><td>DEBOUNCE_WAIT</td><td>1, 0, 0</td></tr>
+        <tr><td>DEBOUNCE_WAIT</td><td>counter[2] == 1</td><td>WAIT</td><td>1, 0, 1</td></tr>
+        <tr><td>DEBOUNCE_WAIT</td><td>otherwise</td><td>DEBOUNCE_WAIT</td><td>1, 0, 1</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Block Diagram</h3>
+    <figure>
+      <img src="/images/labs/lab3/lab3_block.png" alt="Block diagram" />
+      <figcaption>Figure 3: Block diagram connecting all modules.</figcaption>
+    </figure>
+
+    <h3>Schematic</h3>
+    <figure>
+      <img src="/images/labs/lab3/lab3_schematic.png" alt="Schematic" />
+      <figcaption>Figure 4: FPGA schematic showing connections to dual 7-segment display and keypad.</figcaption>
+    </figure>
+
+    <h2>Results and Discussion</h2>
+    <p>
+      The dual 7-segment display responds correctly to keypad inputs. Multiple simultaneous key presses register
+      the first key only. Holding one key ignores all other inputs.
+    </p>
+
+    <h3>Testbench Simulation</h3>
+    <figure>
+      <img src="/images/labs/lab3/mux_waveform.png" alt="Mux waveform" />
+    </figure>
+    <figure>
+      <img src="/images/labs/lab3/mux_result.png" alt="Mux results" />
+      <figcaption>Figure 6: Mux module testbench — correct anode signals verified.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab3/seg_waveform.png" alt="7-seg waveform" />
+    </figure>
+    <figure>
+      <img src="/images/labs/lab3/seg_results.png" alt="7-seg results" />
+      <figcaption>Figure 7: 7-segment display testbench results.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab3/scan_waves.png" alt="Scanner waveform" />
+      <figcaption>Figure 8: Scanner module — rows cycling to scan the keyboard.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab3/fsm_waves.png" alt="FSM waveform" />
+      <figcaption>Figure 9: FSM module — correct state transitions on column input.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab3/lab3_waves.png" alt="Top module waveform" />
+      <figcaption>Figure 10: Top-level module — all modules properly connected and toggling.</figcaption>
+    </figure>
+
+    <h2>Conclusion</h2>
+    <p>
+      This lab took ~20 hours. Most time went to debugging keyboard hardware and the debouncing logic
+      (I was registering multiple inputs when a key was held too long). One lesson: always verify keypad
+      pinouts independently — the first keyboard pinout on the course website was incorrect.
+    </p>
+
+    <h2>AI Prototype Summary</h2>
+    <p>
+      I compared a monolithic prompt (all information at once) vs. modular prompts (broken into steps).
+      The monolithic prompt generated a full design quickly but blurred module boundaries, produced synthesis
+      errors, and required more debugging. Modular prompts gave cleaner FSMs, better readability, and made
+      each piece easier to verify before integration. Key lesson: explicitly separate FSM responsibilities
+      and clarify signal conventions upfront.
+    </p>
+  </section>
+</LabLayout>

@@ -1,0 +1,161 @@
+---
+export interface Props {
+  title: string;
+  activeSlug: string;
+}
+const { title, activeSlug } = Astro.props;
+
+const sections = [
+  { slug: 'overview',      label: 'Overview' },
+  { slug: 'documentation', label: 'Documentation' },
+  { slug: 'fpga',          label: 'FPGA Design' },
+  { slug: 'mcu',           label: 'MCU Design' },
+  { slug: 'results',       label: 'Results' },
+  { slug: 'team',          label: 'Team' },
+];
+---
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — Julia Gong</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__wordmark">Julia Gong</a>
+      <ul class="nav__links">
+        <li><a href="/" class="nav__link">About</a></li>
+        <li><a href="/labs" class="nav__link">E155 Labs</a></li>
+        <li><a href="/project" class="nav__link nav__link--active">Live Music Transcriber</a></li>
+        <li><a href="/artwork" class="nav__link">Artwork</a></li>
+      </ul>
+      <div class="nav__social">
+        <a href="https://www.linkedin.com/in/julia-gong-b8222830a" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://github.com/juliacygong" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="project-layout">
+    <aside class="project-sidebar">
+      <div class="sidebar__back">
+        <a href="/project">← Live Music Transcriber</a>
+      </div>
+      <nav class="sidebar__nav">
+        {sections.map(s => (
+          <a href={`/project/${s.slug}`} class:list={['sidebar__item', { 'sidebar__item--active': s.slug === activeSlug }]}>
+            {s.label}
+          </a>
+        ))}
+      </nav>
+      <a href="https://github.com/georgiatai/E155-final-project" target="_blank" rel="noopener" class="sidebar__github">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        GitHub
+      </a>
+    </aside>
+
+    <article class="project-content">
+      <h1>{title}</h1>
+      <slot />
+    </article>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Julia Gong · jgong@g.hmc.edu · Harvey Mudd College</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+
+  .nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--bg); border-bottom: 1px solid var(--border);
+  }
+  .nav__inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 2rem;
+    height: 60px; display: flex; align-items: center; gap: 2rem;
+  }
+  .nav__wordmark {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600;
+    color: var(--text); letter-spacing: 0.02em; white-space: nowrap; margin-right: auto;
+  }
+  .nav__wordmark:hover { color: var(--wine); }
+  .nav__links { list-style: none; display: flex; gap: 0.25rem; }
+  .nav__link {
+    font-size: 0.85rem; color: var(--gray); padding: 0.35rem 0.75rem;
+    border-radius: 3px; transition: color 0.2s, background 0.2s;
+  }
+  .nav__link:hover { color: var(--wine); background: var(--card-bg); }
+  .nav__link--active { color: var(--wine); font-weight: 500; }
+  .nav__social { display: flex; gap: 0.75rem; align-items: center; }
+  .nav__social a { color: var(--gray); display: flex; align-items: center; transition: color 0.2s; }
+  .nav__social a:hover { color: var(--wine); }
+
+  .project-layout {
+    max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem;
+    display: grid; grid-template-columns: 180px 1fr; gap: 3rem; align-items: start;
+  }
+  .project-sidebar { position: sticky; top: 80px; }
+  .sidebar__back { margin-bottom: 1.5rem; font-size: 0.85rem; }
+  .sidebar__back a { color: var(--gray); }
+  .sidebar__back a:hover { color: var(--wine); }
+  .sidebar__nav {
+    display: flex; flex-direction: column; gap: 0.25rem;
+    border-left: 2px solid var(--border); padding-left: 1rem; margin-bottom: 2rem;
+  }
+  .sidebar__item { font-size: 0.875rem; color: var(--gray); padding: 0.3rem 0; transition: color 0.2s; }
+  .sidebar__item:hover { color: var(--wine); }
+  .sidebar__item--active {
+    color: var(--wine); font-weight: 500;
+    border-left: 2px solid var(--wine); margin-left: -1.125rem; padding-left: 0.875rem;
+  }
+  .sidebar__github {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.8rem; color: var(--gray); border: 1px solid var(--border);
+    padding: 0.4rem 0.75rem; border-radius: 4px; transition: color 0.2s, border-color 0.2s;
+  }
+  .sidebar__github:hover { color: var(--wine); border-color: var(--wine); }
+
+  .project-content h1 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 2rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+  }
+  .project-content h2 { margin-top: 2.5rem; margin-bottom: 1rem; color: var(--wine); font-size: 1.5rem; }
+  .project-content h3 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.1rem; }
+  .project-content p { font-size: 0.95rem; }
+  .project-content img { border-radius: 6px; border: 1px solid var(--border); margin: 1.5rem 0; max-width: 100%; }
+  .project-content figure { margin: 1.5rem 0; }
+  .project-content figcaption { font-size: 0.82rem; color: var(--gray); margin-top: 0.5rem; font-style: italic; }
+  .project-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.88rem; }
+  .project-content th {
+    background: var(--card-bg); color: var(--wine); padding: 0.6rem 0.75rem;
+    text-align: left; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .project-content td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .project-content iframe { border: 1px solid var(--border); border-radius: 6px; margin: 1.5rem 0; max-width: 100%; }
+  .project-content ul, .project-content ol { margin: 0.75rem 0 0.75rem 1.5rem; font-size: 0.95rem; }
+  .project-content li { margin-bottom: 0.4rem; }
+
+  .footer { border-top: 1px solid var(--border); padding: 1rem 0; margin-top: 4rem; }
+  .footer p { font-size: 0.8rem; color: var(--gray); text-align: center; margin: 0; }
+
+  @media (max-width: 768px) {
+    .project-layout { grid-template-columns: 1fr; }
+    .project-sidebar { position: static; }
+    .nav__links { display: none; }
+  }
+</style>

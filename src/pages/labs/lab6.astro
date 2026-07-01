@@ -1,0 +1,78 @@
+---
+import LabLayout from '../../layouts/LabLayout.astro';
+---
+
+<LabLayout title="Lab 6: IoT and SPI" labNum={6} githubUrl="https://github.com/juliacygong/E155/tree/main/lab06/src">
+  <section>
+    <h2>Introduction</h2>
+    <p>
+      In this lab, I designed and built a simple IoT device, wrote C libraries to implement SPI on the MCU
+      and interface with a temperature sensor, interfaced with an ESP8266 module over UART, and built an HTML
+      page to control an LED and temperature sensor. The webpage lets users select output resolution for the
+      temperature sensor and displays the reading. Selecting a resolution triggers the MCU to send the
+      appropriate write and read commands over SPI.
+    </p>
+
+    <h2>MCU Design and Testing Methodology</h2>
+    <p>
+      The MCU uses UART to communicate with the ESP8266 and SPI to communicate with the temperature sensor.
+      The ESP8266 creates a WiFi access point and serves the webpage from the MCU. Connecting to the network
+      and navigating to <code>http://192.168.4.1/</code> displays the page.
+    </p>
+    <p>
+      A 125000 baud UART connection links the MCU and ESP8266. The MCU sends an HTML file; the ESP8266 updates
+      the page and forwards user requests back to the MCU.
+    </p>
+    <p>
+      Temperature resolution commands from the user determine the SPI write/read commands. The number of
+      resolution bits is written to the sensor register, then 2 bytes are read: MSB (with sign bit) and LSB.
+      Temperature is computed as: <code>Temp = MSB + LSB / 256.0</code>
+    </p>
+
+    <h2>Technical Documentation</h2>
+    <p>
+      Source code in <a href="https://github.com/juliacygong/E155/tree/main/lab06/src" target="_blank" rel="noopener">GitHub</a>:
+      <code>main.c</code>, SPI configuration, temperature sensor configuration, and external libraries.
+    </p>
+
+    <h3>Schematic</h3>
+    <figure>
+      <img src="/images/labs/lab6/lab6schematic.jpeg" alt="Schematic" />
+      <figcaption>Figure 1: MCU connections to LED, ESP8266, and temperature sensor.</figcaption>
+    </figure>
+
+    <h2>Results and Discussion</h2>
+    <p>
+      The system correctly interfaces with the LED and temperature sensor through the HTML webpage. The
+      display shows temperature readings getting more precise as resolution increases.
+    </p>
+    <iframe src="https://drive.google.com/file/d/1Vby-pSSeZ3AxWrfpYfxx-3frQddxamIw/preview"
+            width="740" height="480" allow="autoplay"></iframe>
+
+    <h3>SPI Logic Analyzer Trace</h3>
+    <figure>
+      <img src="/images/labs/lab6/lab6scope.JPG" alt="Logic analyzer trace" />
+      <figcaption>Figure 2: Logic analyzer trace for an 8-bit temperature sensor command.</figcaption>
+    </figure>
+    <p>Signals: D0 = CS, D1 = CLK, D2 = MISO, D3 = MOSI.</p>
+    <p>
+      After CS goes high: MCU sends <code>0x80</code> (write config register address), then <code>0xE0</code>
+      (8-bit resolution). Second CS: MCU sends <code>0x02</code> to read MSB, <code>0x00</code> filler →
+      receives <code>0x17</code>. Then <code>0x01</code> to read LSB → receives <code>0x00</code>.
+      Decoded temperature: 23 + 0/256 = <strong>23°C</strong>.
+    </p>
+
+    <h2>Conclusion</h2>
+    <p>
+      Successfully built a system interfacing a temperature sensor over SPI and an ESP8266 over UART to
+      create a webpage that controls and displays temperature data. This lab took 12 hours.
+    </p>
+
+    <h2>AI Prototype Summary</h2>
+    <p>Two prompts tested:</p>
+    <ol style="margin: 0.75rem 0 0.75rem 1.5rem; font-size: 0.95rem;">
+      <li style="margin-bottom: 0.5rem;"><em>Create an HTML page to show temperature, control an LED, and change precision.</em> → ChatGPT produced a more aesthetically polished page than mine (better colors, font sizes).</li>
+      <li><em>Write a C function to carry out a SPI transaction to retrieve a temperature reading from a DS1722 on the STM32L432KC.</em> → Code was incorrect: wrong SPI phase and improper temperature calculation.</li>
+    </ol>
+  </section>
+</LabLayout>

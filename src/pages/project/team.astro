@@ -1,0 +1,85 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+---
+
+<ProjectLayout title="About the Team" activeSlug="team">
+  <div class="team-grid">
+    <div class="team-member">
+      <img src="/images/project/julia_headshot.jpg" alt="Julia Gong" class="team-member__photo" />
+      <h2 class="team-member__name">Julia Gong</h2>
+      <div class="team-member__links">
+        <a href="https://www.linkedin.com/in/julia-gong-b8222830a" target="_blank" rel="noopener">LinkedIn</a>
+        <span>·</span>
+        <a href="https://github.com/juliacygong" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p>
+        Julia Gong is a junior engineering major at Harvey Mudd College interested in digital design and
+        the integration of hardware systems. Outside of engineering, she enjoys creative, hands-on work —
+        including pottery, bead embroidery, painting, and knitting.
+      </p>
+    </div>
+
+    <div class="team-member">
+      <img src="/images/project/georgia_headshot.jpg" alt="Georgia Tai" class="team-member__photo" />
+      <h2 class="team-member__name">Georgia Tai</h2>
+      <div class="team-member__links">
+        <a href="https://www.linkedin.com/in/georgia-tai/" target="_blank" rel="noopener">LinkedIn</a>
+        <span>·</span>
+        <a href="https://github.com/georgiatai" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p>
+        Georgia Tai is a junior engineering student at Harvey Mudd College with an interest in computer
+        and electrical engineering. Born and raised in Hsinchu, Taiwan, she developed a passion for electrical
+        engineering. Outside of engineering, she enjoys music, drawing, and reading manga.
+      </p>
+    </div>
+  </div>
+</ProjectLayout>
+
+<style>
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
+    margin-top: 1rem;
+  }
+
+  .team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .team-member__photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border);
+    box-shadow: 0 4px 16px rgba(123, 45, 62, 0.1);
+    margin-bottom: 1.25rem;
+  }
+
+  .team-member__name {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .team-member__links {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    color: var(--gray);
+  }
+  .team-member__links span { color: var(--border); }
+
+  .team-member p {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.7;
+    text-align: left;
+  }
+</style>

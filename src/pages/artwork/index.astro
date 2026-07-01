@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const pieces = [
+  { images: ['bio1.JPG', 'bio2.JPG', 'bio3.JPG'], caption: 'The World. Abstract Biomorphic Sculpture, 24 inches. Made with coils.' },
+  { images: ['crane_bowl.JPG', 'crane_bowl2.JPG'], caption: 'Crane Bowls. Wheel Thrown and Painted.' },
+  { images: ['mooncake.JPG'], caption: 'Mooncake Jars. Handbuilt and Carved.' },
+  { images: ['comb1.JPG', 'comb2.JPG'], caption: 'Bone Comb. Handbuilt and Reduction Fired with Iron Oxide Wash.' },
+  { images: ['panda_cup.JPG'], caption: 'Panda Whisk Holder. Wheel Thrown and Painted.' },
+  { images: ['skeletal1.JPG', 'skeletal2.JPG'], caption: 'Hold On. Abstract Skeletal Structure, Handbuilt 22 inches. Made after the first collapsed.' },
+  { images: ['panda_dish.JPG'], caption: 'Panda Dish. Wheel Thrown and Painted.' },
+  { images: ['inter1.JPG', 'inter2.JPG'], caption: 'Mirror, a piece for interpersonal connection. Handbuilt.' },
+  { images: ['flower_bowl.JPG'], caption: 'Flower Bowl. Wheel Thrown and Painted.' },
+  { images: ['zodiac_bowl.JPG'], caption: 'Zodiac Bowl. Wheel Thrown and Painted.' },
+  { images: ['dragon_bowl.JPG'], caption: 'Dragon Bowl. Wheel Thrown and Carved.' },
+  { images: ['dragonbowls.JPG'], caption: 'Dragon China Bowls. Wheel Thrown and Carved.' },
+  { images: ['mahjong_cups.JPG'], caption: 'Mahjong Cups. Wheel Thrown, Carved, and Painted.' },
+  { images: ['teapot.JPG'], caption: 'Kyusu Teapot. Wheel Thrown and Painted.' },
+  { images: ['bow_dumbler.JPG'], caption: 'Lucky Charm Tumbler. Wheel Thrown and Handbuilt.' },
+  { images: ['vase.JPG'], caption: 'Cherry Blossom Vase. Wheel Thrown and Handbuilt.' },
+  { images: ['crane_tumbler.JPG'], caption: 'Crane Tumbler. Wheel Thrown and Painted.' },
+];
+---
+
+<BaseLayout title="Artwork" description="Ceramics by Julia Gong">
+  <div class="artwork-page">
+    <div class="container">
+      <div class="chapter-divider" style="margin-top: 3rem;"><span>Artwork</span></div>
+      <div class="art-intro">
+        <p>
+          Returning to the studio after working on a delicate coil sculpture until 5am, my heart sank when
+          I saw it had collapsed. Ceramics is unforgiving — clay shifts, molds, and remembers every touch.
+          Yet confronting my perfectionism through ceramics has been central to developing my patience and
+          resilience. Early failures in building and wheel throwing frustrated me, but the process taught me
+          to turn disappointment into experimentation and to value process over outcome. I am constantly
+          reminded that my growth, like any piece I've made, requires constant reshaping, reflection, and
+          the willingness to start again.
+        </p>
+        <p>This selection of pieces is both a reflection of my identity and my growth.</p>
+      </div>
+    </div>
+
+    <div class="gallery container--wide">
+      {(() => {
+        let soloCount = 0;
+        return pieces.map(piece => {
+          const count = piece.images.length;
+          const isSolo = count === 1;
+          const flip = isSolo && (soloCount++ % 2 === 1);
+          return (
+            <div class:list={['piece', `piece--${isSolo ? 'solo' : count === 2 ? 'duo' : 'trio'}`, { 'piece--flip': flip }]}>
+              <div class="piece__images">
+                {piece.images.map(img => (
+                  <img src={`/images/art/${img}`} alt={piece.caption} loading="lazy" />
+                ))}
+              </div>
+              {count <= 2 ? (
+                <p class="piece__caption piece__caption--side">{piece.caption}</p>
+              ) : (
+                <p class="piece__caption piece__caption--below">{piece.caption}</p>
+              )}
+            </div>
+          );
+        });
+      })()}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .artwork-page { padding-bottom: 6rem; }
+
+  .art-intro {
+    max-width: 680px;
+    margin-bottom: 4rem;
+    font-size: 0.975rem;
+    color: var(--gray);
+    line-height: 1.8;
+  }
+  .art-intro p + p { margin-top: 0.75rem; }
+
+  .gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  /* ── Solo (1 image): constrained width, caption beside ── */
+  .piece--solo {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .piece--solo .piece__images {
+    flex: 0 0 auto;
+    max-width: 420px;
+  }
+  .piece--solo .piece__images img {
+    width: 100%;
+    height: auto;
+  }
+  .piece--solo .piece__caption--side {
+    flex: 0 0 220px;
+  }
+  /* Flip: caption left, image right */
+  .piece--flip {
+    flex-direction: row-reverse;
+  }
+
+  /* ── Duo (2 images): both horizontal, caption right ── */
+  .piece--duo {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  /* ── Trio (3 images): all horizontal, caption below ── */
+  .piece--trio {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  /* Images always in a horizontal row */
+  .piece__images {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+
+  .piece__images img {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+    border: none;
+    margin: 0;
+  }
+
+  /* Side caption (1–2 images) */
+  .piece__caption--side {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* Below caption (3 images) */
+  .piece__caption--below {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--text);
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+  }
+
+  @media (max-width: 860px) {
+    .piece--solo,
+    .piece--duo {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .piece--trio .piece__images {
+      flex-direction: column;
+    }
+  }
+</style>

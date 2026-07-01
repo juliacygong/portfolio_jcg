@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Julia Gong" description="Engineer · Artist · Researcher at Harvey Mudd College">
+  <section class="hero">
+    <div class="hero__photo-wrap">
+      <img src="/images/headshot/headshot.jpg" alt="Julia Gong" class="hero__photo" />
+    </div>
+
+    <h1 class="hero__name">Julia Gong</h1>
+
+    <div class="hero__bio">
+      <p>
+        I'm an engineering student at Harvey Mudd College and a Clay Wolkin Research Fellow (co 2027).
+        My research focuses on low-level computer architecture and processor design — implementing the
+        hypervisor extension for a RISC-V processor and developing verification tests across machine,
+        supervisor, and user privilege modes. This fall, I'll continue this work designing and
+        implementing a superscalar RISC-V processor to explore higher-performance execution and
+        instruction-level parallelism.
+      </p>
+      <p>
+        I didn't come into college expecting to focus on hardware, but after taking Digital Design and
+        Computer Architecture I found myself drawn to the logic and structure of how computers function
+        from gate-level circuits to pipelined processors. I've always enjoyed creative, hands-on work —
+        including pottery, embroidery, and beadwork — so I really enjoyed the creative process of
+        designing finite state machines and building systems that interact on the microarchitectural level.
+        I'm interested in work that brings together low-level systems thinking with thoughtful design,
+        and I'm continuing to explore where that intersection may lead.
+      </p>
+      <p>
+        Feel free to reach out at <a href="mailto:jgong@g.hmc.edu">jgong@g.hmc.edu</a>.
+      </p>
+    </div>
+
+    <div class="hero__links">
+      <a href="/labs" class="btn">E155 Labs</a>
+      <a href="/project" class="btn">Live Music Transcriber</a>
+      <a href="/artwork" class="btn btn--outline">Artwork</a>
+    </div>
+  </section>
+
+  <section class="highlights container">
+    <div class="chapter-divider"><span>Research</span></div>
+    <div class="highlight-grid">
+      <div class="highlight-card">
+        <h3>RISC-V Hypervisor Extension</h3>
+        <p class="highlight-card__meta">Clay Wolkin Research Fellowship · 2024–2025</p>
+        <p>Implementing the hypervisor extension for a RISC-V processor with verification tests spanning machine, supervisor, and user privilege modes.</p>
+      </div>
+      <div class="highlight-card">
+        <h3>Superscalar RISC-V Processor</h3>
+        <p class="highlight-card__meta">Clay Wolkin Research Fellowship · Fall 2025</p>
+        <p>Designing and implementing a superscalar RISC-V processor to explore higher-performance execution and instruction-level parallelism.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .hero__photo-wrap {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--border);
+    box-shadow: 0 4px 24px rgba(123, 45, 62, 0.12);
+    margin-bottom: 1.75rem;
+  }
+
+  .hero__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero__name {
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__bio {
+    text-align: left;
+    font-size: 0.975rem;
+    color: var(--text);
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .hero__links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.55rem 1.25rem;
+    background: var(--wine);
+    color: #FAF7F2;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn:hover {
+    background: #6a2535;
+    color: #FAF7F2;
+    transform: translateY(-1px);
+  }
+  .btn--outline {
+    background: transparent;
+    color: var(--wine);
+    border: 1px solid var(--wine);
+  }
+  .btn--outline:hover {
+    background: var(--wine);
+    color: #FAF7F2;
+  }
+
+  .highlights {
+    padding-bottom: 4rem;
+  }
+
+  .highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .highlight-card {
+    background: var(--card-bg);
+    border: 2px solid var(--wine);
+    border-radius: 0;
+    padding: 1.5rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .highlight-card:hover {
+    box-shadow: 0 4px 20px rgba(123, 45, 62, 0.1);
+    transform: translateY(-2px);
+  }
+  .highlight-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+  }
+  .highlight-card__meta {
+    font-size: 0.78rem;
+    color: var(--wine);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+  }
+  .highlight-card p:last-child {
+    font-size: 0.9rem;
+    color: var(--gray);
+  }
+</style>

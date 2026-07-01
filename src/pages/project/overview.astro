@@ -1,0 +1,49 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+---
+
+<ProjectLayout title="Overview" activeSlug="overview">
+  <h2>Project Abstract</h2>
+  <p>
+    This project takes in sound inputs — from a keyboard, any instrument, or singing — transcribes the sound
+    onto a score in real-time at a given BPM, and plays back the input melody. An FPGA is used as the main
+    calculation and display engine, using Fast Fourier Transform (FFT) for frequency analysis and driving a
+    VGA display. An MCU interfaces the audio inputs.
+  </p>
+  <p>
+    An analog microphone takes in sounds; the MCU converts them to digital signals using ADC and sends
+    them to the FPGA over SPI. The FPGA uses FFT to extract the frequency and duration of each note.
+    The array of notes is used by the FPGA to calculate pixel positions and display a score on a VGA monitor.
+  </p>
+
+  <h2>Project Motivation</h2>
+  <p>
+    Both of us are interested in digital design and audio processing, and wanted to leverage the FPGA's fast
+    computational capabilities to process sound. Due to the importance and wide applications of FFT, we
+    wanted to design and integrate FFT in hardware. We chose VGA to display the output because accurately
+    depicting a music score requires high pixel resolution.
+  </p>
+
+  <h2>System Block Diagram</h2>
+  <figure>
+    <img src="/images/project/system.png" alt="System block diagram" />
+    <figcaption>
+      System block diagram: sound → microphone → MCU ADC → SPI → FPGA → VGA monitor.
+    </figcaption>
+  </figure>
+
+  <h2>Note Display Demo</h2>
+  <iframe src="https://drive.google.com/file/d/1m4o0ek6JZH5q7guccxkDqV59gKsoG6BX/preview"
+          width="640" height="480" allow="autoplay"></iframe>
+  <p style="font-size: 0.82rem; color: var(--gray);">
+    Note: aliasing in the video is from phone recording at a lower frame rate than VGA's 60Hz refresh.
+  </p>
+
+  <h2>Acknowledgements</h2>
+  <p>
+    We'd like to thank Prof. Spencer for his advice in debugging and for challenging us to build this complex
+    project. Thanks also to Xavier for providing the VGA monitors, and to grutors Kavi, Troy, and Vikram for
+    helpful debugging tips. A shoutout to our friends in Microps who accompanied us during late nights in the
+    lab and offered support throughout the process!
+  </p>
+</ProjectLayout>

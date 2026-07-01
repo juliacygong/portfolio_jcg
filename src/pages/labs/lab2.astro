@@ -1,0 +1,112 @@
+---
+import LabLayout from '../../layouts/LabLayout.astro';
+---
+
+<LabLayout title="Lab 2: Multiplexed 7-Segment Display" labNum={2} githubUrl="https://github.com/juliacygong/E155/tree/main/lab02">
+  <section>
+    <h2>Introduction</h2>
+    <p>
+      In this lab, I used time multiplexing to drive two 7-segment displays using a single set of FPGA I/O pins.
+      Time multiplexing was used because the anode of the 7-segment displays required more current than the FPGA
+      output could provide. The dual 7-segment display takes inputs from 2 DIP switches (each 4 bits) and outputs
+      the values from each. The sum of the digits is shown on a set of 5 LEDs.
+    </p>
+
+    <h2>FPGA Design and Testing Methodology</h2>
+    <p>
+      The design uses a clock divider that toggles frequency, a mux that selects which anode turns on, an adder
+      that computes the sum for the LED display, and the 7-segment module from Lab 1.
+    </p>
+    <p>
+      Since 60Hz is the largest frequency humans can perceive, I toggled the counter at 80Hz so the numbers
+      wouldn't bleed together.
+    </p>
+
+    <h3>Hardware Implementation</h3>
+    <figure>
+      <img src="/images/labs/lab2/lab2_board.jpg" alt="Breadboard layout" />
+      <figcaption>Figure 1: Breadboard layout of the dual 7-segment display and 5 LEDs connected to the FPGA.</figcaption>
+    </figure>
+    <p>
+      Components: development board, dual 7-segment display, 5 LEDs, two 2N3906 PNP transistors, DIP switch.
+    </p>
+    <p>
+      220Ω resistors were used to draw current from each segment. With a PNP transistor on the anodes (Vce = 200mV)
+      and LED voltage drop of 1.8V: (3.3V − 0.2V − 1.8V) / 10mA = 130Ω → used 220Ω for safety.
+    </p>
+    <p>
+      Base resistors for the PNP transistors: V = 3.3V − 0.65V, Ic = 8mA → R = 330Ω.
+    </p>
+    <p>
+      For the LEDs (red, 2.1V drop, 10mA): R = (3.3 − 2.1) / 20mA = 110Ω → used 220Ω.
+    </p>
+
+    <h2>Technical Documentation</h2>
+    <p>
+      Source code in <a href="https://github.com/juliacygong/E155/tree/main/lab02" target="_blank" rel="noopener">GitHub</a>:
+      top module, LED display module, mux module, 7-segment display module, and testbenches for all four.
+    </p>
+
+    <h3>Block Diagram</h3>
+    <figure>
+      <img src="/images/labs/lab2/lab2_block.png" alt="Block diagram" />
+      <figcaption>Figure 2: Block diagram connecting all modules.</figcaption>
+    </figure>
+
+    <h3>Schematic</h3>
+    <figure>
+      <img src="/images/labs/lab2/lab2_schematic.jpeg" alt="Schematic" />
+      <figcaption>Figure 3: Schematic showing FPGA connections to dual 7-segment display and LEDs.</figcaption>
+    </figure>
+
+    <h2>Results and Discussion</h2>
+    <p>All 7-segment and LED display outputs work as expected, verified through simulation and hardware.</p>
+
+    <h3>Testbench Simulation</h3>
+    <figure>
+      <img src="/images/labs/lab2/mux_waveform.png" alt="Mux waveform" />
+    </figure>
+    <figure>
+      <img src="/images/labs/lab2/mux_result.png" alt="Mux testbench results" />
+      <figcaption>Figure 4: Testbench results for the mux module — correct anode and segment selection verified.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab2/led_waveform.png" alt="LED waveform" />
+    </figure>
+    <figure>
+      <img src="/images/labs/lab2/led_results.png" alt="LED testbench results" />
+      <figcaption>Figure 5: Testbench results for the 5 LED display module.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab2/seg_waveform.png" alt="7-segment waveform" />
+    </figure>
+    <figure>
+      <img src="/images/labs/lab2/seg_results.png" alt="7-segment testbench results" />
+      <figcaption>Figure 6: Testbench results for the 7-segment display module.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab2/lab2_waveform.png" alt="Top module waveform" />
+    </figure>
+    <figure>
+      <img src="/images/labs/lab2/lab2_result.png" alt="Top module testbench results" />
+      <figcaption>Figure 7: Top module simulation — anode signals toggle at the correct frequency.</figcaption>
+    </figure>
+
+    <h2>Conclusion</h2>
+    <p>
+      The design successfully displays inputs on the dual 7-segment display through time multiplexing
+      and adds the values to display on 5 LEDs. This lab took 8 hours.
+    </p>
+
+    <h2>AI Prototype Summary</h2>
+    <p>
+      Prompt: <em>Write SystemVerilog HDL to time multiplex a single seven segment decoder to decode two sets
+      of input bits and drive two sets of seven output bits.</em>
+    </p>
+    <p>
+      The logic was mostly correct, but ChatGPT reversed the bit order for 7-segment outputs (LSB to MSB instead of MSB to LSB).
+      The logic is straightforward enough that the AI handled it well overall.
+      Transcript: <a href="https://chatgpt.com/share/68bfeb95-5428-800e-8fd2-3bd4a7b33293" target="_blank" rel="noopener">chatgpt.com/share/…</a>
+    </p>
+  </section>
+</LabLayout>

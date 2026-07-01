@@ -1,7 +1,21 @@
 {
   "permissions": {
     "allow": [
-      "Bash(quarto render *)"
+      "Bash(quarto render *)",
+      "Bash(npm --version)",
+      "Read(//Users/juliagong/Desktop/**)",
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(cp /Users/juliagong/Desktop/Portfolio/headshot/headshot.jpg /Users/juliagong/Desktop/portfolio-astro/public/images/headshot/headshot.jpg)",
+      "Bash(cp \"/Users/juliagong/Desktop/Portfolio/art images/\"*.JPG /Users/juliagong/Desktop/portfolio-astro/public/images/art/)",
+      "Bash(cp \"/Users/juliagong/Desktop/Portfolio/art images/\"*.jpg /Users/juliagong/Desktop/portfolio-astro/public/images/art/)",
+      "Bash(npm run *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:4321/)",
+      "Bash(node *)",
+      "Bash(gh auth *)",
+      "Bash(cp -r /Users/juliagong/Desktop/portfolio-astro/src /Users/juliagong/Desktop/Portfolio/)",
+      "Bash(cp -r /Users/juliagong/Desktop/portfolio-astro/public /Users/juliagong/Desktop/Portfolio/)",
+      "Bash(git add *)"
     ]
   }
 }

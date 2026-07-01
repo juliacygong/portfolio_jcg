@@ -1,0 +1,63 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+---
+
+<ProjectLayout title="Documentation" activeSlug="documentation">
+  <h2>Schematics</h2>
+  <figure>
+    <img src="/images/project/projschematic.png" alt="System schematic" />
+    <figcaption>Schematics of the physical system.</figcaption>
+  </figure>
+  <p>
+    The microphone connects to <code>PB0</code>, the ADC input of the MCU. The MCU connects to the FPGA
+    via SPI, and the FPGA connects to the VGA display via a breakout cord. 270Ω resistors create a voltage
+    divider with the VGA's internal 75Ω resistance, bringing 3.3V FPGA output down to ~0.7V required by each
+    VGA color pin.
+  </p>
+
+  <h2>New Hardware</h2>
+
+  <h3>Analog Microphone</h3>
+  <p>
+    We used the <a href="https://www.adafruit.com/product/1063" target="_blank" rel="noopener">MAX4466 from Adafruit</a>
+    (2.4–5V supply, 20–20kHz detection range, 25×–125× adjustable gain). With GND, VCC, and OUT pins, it
+    connects simply to the MCU's 3.3V breakout board. This let us use the ADC functionality not previously
+    used in the course.
+  </p>
+
+  <h3>VGA Display</h3>
+  <p>
+    We used a 1024×600 pixel VGA display at 60Hz refresh rate. A
+    <a href="https://www.adafruit.com/product/3125" target="_blank" rel="noopener">breakout cord</a>
+    connects the FPGA to the VGA. The VGA allows use of FPGA primitives such as <code>PLL_B</code> for its
+    clock — new from the previous labs. Full VGA control design is documented in the <a href="/project/fpga">FPGA page</a>.
+  </p>
+
+  <h2>Bill of Materials</h2>
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Part #</th><th>Manufacturer</th><th>Qty</th><th>Price</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Microphone</td><td>MAX4466</td><td>Adafruit</td><td>×2</td><td>$13.90</td></tr>
+      <tr><td>Audio Codec</td><td>MAX98357A</td><td>Adafruit</td><td>×1</td><td>$5.95</td></tr>
+      <tr><td>VGA Breakout Cord</td><td>3124</td><td>Adafruit</td><td>×1</td><td>$4.50</td></tr>
+      <tr><td>Audio Jack to Micro USB B</td><td>—</td><td>PIIHUSW</td><td>×1</td><td>$7.57</td></tr>
+      <tr><td>VGA Display</td><td>—</td><td>—</td><td>×1</td><td>Stockroom</td></tr>
+      <tr><td>Op-amp</td><td>MCP601</td><td>—</td><td>×1</td><td>Stockroom</td></tr>
+      <tr><td>Potentiometer</td><td>—</td><td>—</td><td>×1</td><td>Stockroom</td></tr>
+      <tr><td>Speaker</td><td>—</td><td>—</td><td>×1</td><td>Stockroom</td></tr>
+      <tr><td>STM32L432KC MCU</td><td>—</td><td>STMicroelectronics</td><td>×1</td><td>E155 team</td></tr>
+      <tr><td>UPDuino v3.1 FPGA</td><td>—</td><td>tinyVision.ai</td><td>×1</td><td>E155 team</td></tr>
+      <tr><td colspan="4"><strong>Total (incl. shipping + tax)</strong></td><td><strong>$46.83</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Hardware References</h2>
+  <ul>
+    <li>MCU — STM32L432KC: <a href="https://www.st.com/resource/en/reference_manual/rm0394-stm32l41xxx42xxx43xxx44xxx45xxx46xxx-advanced-armbased-32bit-mcus-stmicroelectronics.pdf" target="_blank" rel="noopener">Reference Manual</a>, <a href="https://www.st.com/resource/en/datasheet/stm32l432kc.pdf" target="_blank" rel="noopener">Datasheet</a></li>
+    <li>FPGA — iCE40UP: <a href="https://www.farnell.com/datasheets/3215488.pdf" target="_blank" rel="noopener">Datasheet</a></li>
+    <li>Microphone — MAX4466: <a href="https://cdn-shop.adafruit.com/datasheets/MAX4465-MAX4469.pdf" target="_blank" rel="noopener">Datasheet</a></li>
+    <li>G. W. Slade, "The Fast Fourier Transform in Hardware: A Tutorial Based on an FPGA Implementation," MIT 6.111 Course Handout, Mar. 2013. <a href="https://web.mit.edu/6.111/www/f2017/handouts/FFTtutorial121102.pdf" target="_blank" rel="noopener">PDF</a></li>
+  </ul>
+</ProjectLayout>

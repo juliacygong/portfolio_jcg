@@ -1,0 +1,89 @@
+---
+import LabLayout from '../../layouts/LabLayout.astro';
+---
+
+<LabLayout title="Lab 4: Digital Audio" labNum={4} githubUrl="https://github.com/juliacygong/E155/tree/main/lab04">
+  <section>
+    <h2>Introduction</h2>
+    <p>
+      In this lab, I used the timers in an STM32L432KC microcontroller to generate square waves by toggling a
+      GPIO pin at specific frequencies and durations, creating digital audio. This involved reading the MCU
+      datasheet to write a C library from scratch.
+    </p>
+
+    <h2>MCU Design and Testing Methodology</h2>
+    <p>
+      The design uses two timers: <code>TIM16</code> for PWM signal generation (frequencies) and <code>TIM6</code>
+      for delay in ms. TIM16 uses a prescalar of 19 to divide the system clock to 4MHz; TIM6 uses a prescalar of
+      39,999 to divide to 2KHz.
+    </p>
+    <figure>
+      <img src="/images/labs/lab4/freq_dur.png" alt="Frequency and duration calculations" />
+      <figcaption>Figure 1: Frequency and duration calculations.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab4/pitch.png" alt="Pitch accuracy table" />
+      <figcaption>Figure 2: Pitches for frequencies 220–1000 Hz are accurate within 1%.</figcaption>
+    </figure>
+
+    <h3>Hardware Implementation</h3>
+    <figure>
+      <img src="/images/labs/lab4/board3.png" alt="Breadboard layout" />
+      <figcaption>Figure 3: Breadboard layout of the speaker system.</figcaption>
+    </figure>
+    <p>
+      Components: LM386 op-amp, 10kΩ potentiometer, 8Ω speaker. The op-amp amplifies the output signal
+      from MCU pin PA6; the potentiometer adjusts volume.
+    </p>
+
+    <h2>Technical Documentation</h2>
+    <p>
+      Source code in <a href="https://github.com/juliacygong/E155/tree/main/lab04" target="_blank" rel="noopener">GitHub</a>:
+      C and header files for main, RCC, GPIO, FLASH, TIM6, and TIM16.
+    </p>
+
+    <h3>Schematic</h3>
+    <figure>
+      <img src="/images/labs/lab4/lab4_schematic.png" alt="Schematic" />
+      <figcaption>Figure 4: Schematic of the digital audio hardware system.</figcaption>
+    </figure>
+
+    <h2>Results and Discussion</h2>
+    <p>
+      The system plays Für Elise without crackling. I also transcribed a jazz melody — can you guess the song?
+    </p>
+    <iframe src="https://drive.google.com/file/d/1uw85LcZXG10Emh3EIm2Y6yipRfLjObF2/preview"
+            width="740" height="480" allow="autoplay"></iframe>
+    <figure>
+      <img src="/images/labs/lab4/song.png" alt="Mystery song melody" />
+      <figcaption>Figure 5: Melody of the mystery song.</figcaption>
+    </figure>
+
+    <h3>Oscilloscope Frequency Verification</h3>
+    <figure>
+      <img src="/images/labs/lab4/200scope.JPG" alt="200 Hz oscilloscope trace" />
+      <figcaption>Figure 6: Oscilloscope trace at 200 Hz — exactly 200 Hz measured.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab4/2000scope.JPG" alt="2000 Hz oscilloscope trace" />
+      <figcaption>Figure 7: Oscilloscope trace at 2000 Hz — output accurate to within 1%.</figcaption>
+    </figure>
+
+    <h2>Conclusion</h2>
+    <p>
+      The design successfully produces square waves at different frequencies using MCU timers. For a while my
+      songs played but sounded crackly — I eventually figured out the op-amp pins weren't grounded. This lab
+      took 12 hours.
+    </p>
+
+    <h2>AI Prototype Summary</h2>
+    <p>
+      Prompt: <em>What timers should I use on the STM32L432KC to generate frequencies ranging from 220Hz to 1kHz?
+      What formulae are relevant, and what registers need to be set?</em>
+    </p>
+    <p>
+      ChatGPT provided a helpful list of timers with descriptions, the timer frequency formula, and an example
+      calculation — a strong starting point.
+    </p>
+  </section>
+</LabLayout>

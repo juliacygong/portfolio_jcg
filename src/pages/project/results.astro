@@ -1,0 +1,70 @@
+---
+import ProjectLayout from '../../layouts/ProjectLayout.astro';
+---
+
+<ProjectLayout title="Results" activeSlug="results">
+  <h2>Project Specifications</h2>
+  <p>
+    Original proposed specifications (playback specs were removed after consulting Prof. Spencer on
+    project scope):
+  </p>
+
+  <h3>Input — Detection and Analysis</h3>
+  <ul>
+    <li>User can stop and start transcription via physical button — <strong style="color: var(--wine);">✓ Met</strong></li>
+    <li>System converts analog microphone signals into digital — <strong style="color: var(--wine);">✓ Met</strong></li>
+    <li>Uses FFT to extract clear signal from input — <strong style="color: var(--wine);">✓ Met</strong></li>
+    <li>System calculates input frequency and rounds to nearest half note — <strong style="color: var(--wine);">✓ Met</strong></li>
+    <li>System detects duration accurate to 1/16 beat — <strong style="color: var(--gray);">~ Changed to 1/2 beat (memory constraint)</strong></li>
+  </ul>
+
+  <h3>Output — Display</h3>
+  <ul>
+    <li>Display updates at &gt;24 Hz — <strong style="color: var(--wine);">✓ Met (60Hz VGA)</strong></li>
+    <li>Note durations displayed for 120 BPM — <strong style="color: var(--wine);">✓ Met</strong></li>
+    <li>Notes displayed on VGA ~75ms after note release — <strong style="color: var(--wine);">✓ Met</strong></li>
+  </ul>
+
+  <h2>Specifications in Detail</h2>
+
+  <h3>ADC and SPI Verification</h3>
+  <figure>
+    <img src="/images/project/spi_result.jpeg" alt="SPI logic analyzer result" />
+    <figcaption>
+      Logic analyzer result — MOSI signal hovers around <code>0x80</code> because the microphone's
+      quiescent voltage sits at half the supply voltage.
+    </figcaption>
+  </figure>
+
+  <h3>FFT</h3>
+  <p>
+    FFT successfully extracts signals in simulation. In hardware, the system experiences instability
+    due to environmental noise. We set a magnitude threshold so only notes above a minimum level are
+    processed and displayed.
+  </p>
+
+  <h3>Duration Constraint</h3>
+  <p>
+    Limited FPGA memory prevented 16-bit resolution at the desired sampling frequency for 1/8-note
+    detection at 120 BPM. We lowered input resolution to 8-bit to accommodate whole-number k values
+    corresponding to notes in a two-octave range.
+  </p>
+
+  <h2>Testbenches</h2>
+  <p>
+    The top-level FFT module (<code>fft_ctrl</code>) was tested with a testbench that generates ideal
+    bitstream data and inputs it bit-by-bit, simulating SPI transfer. The FFT produced a stable note
+    <strong>D5# (db)</strong> in our encoding.
+  </p>
+  <figure>
+    <img src="/images/project/fft_ctrl_wave.png" alt="FFT testbench waveform" />
+    <figcaption>Waveform of <code>fft_ctrl</code> testbench — FFT correctly identifies D5#.</figcaption>
+  </figure>
+
+  <h2>Note Display Demo</h2>
+  <iframe src="https://drive.google.com/file/d/1m4o0ek6JZH5q7guccxkDqV59gKsoG6BX/preview"
+          width="740" height="480" allow="autoplay"></iframe>
+  <p style="font-size: 0.82rem; color: var(--gray);">
+    Aliasing in the video is from phone recording, not the VGA display (VGA refreshes at 60Hz).
+  </p>
+</ProjectLayout>

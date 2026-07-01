@@ -1,0 +1,85 @@
+---
+import LabLayout from '../../layouts/LabLayout.astro';
+---
+
+<LabLayout title="Lab 5: Interrupts" labNum={5} githubUrl="https://github.com/juliacygong/E155/tree/main/lab05">
+  <section>
+    <h2>Introduction</h2>
+    <p>
+      In this lab, I used an MCU to determine the speed of a motor by reading interrupts from a quadrature
+      encoder. Quadrature encoders measure the relative or absolute angle of a motor by tracking how quickly
+      a patterned disk rotates. Two sensors 90° out of phase determine direction and speed with high resolution.
+      The motor has 408 pulses per rotation and rotates at ~2 rev/s at 10V. The system determines and prints
+      speed and direction, updating every 1Hz.
+    </p>
+
+    <h2>MCU Design and Testing Methodology</h2>
+    <p>
+      The design uses two interrupt sources:
+    </p>
+    <p>
+      The <strong>encoder interrupt</strong> fires on any edge of the A or B signal. A lookup table implements
+      the counter logic — 4 bits encode transitions from each 2-bit state (00, 01, 10, 11). Values: 0 = illegal,
+      1 = clockwise, −1 = counterclockwise. Indexing uses <code>(prev_state &lt;&lt; 2) | cur_state</code>.
+      Lookup values are added to the encoder count.
+    </p>
+    <p>
+      The <strong>timer interrupt</strong> fires every millisecond. At 1000ms, the count difference is used to
+      calculate revolutions per second. The count is divided by 1632 (4 edges × 408 pulses/rotation). The result
+      is printed and the timer resets.
+    </p>
+
+    <h2>Technical Documentation</h2>
+    <p>
+      Source code in <a href="https://github.com/juliacygong/E155/tree/main/lab05" target="_blank" rel="noopener">GitHub</a>:
+      <code>main.c</code> and external libraries.
+    </p>
+
+    <h3>Schematic</h3>
+    <figure>
+      <img src="/images/labs/lab5/lab5_schematic.png" alt="Schematic" />
+      <figcaption>Figure 1: Connections between MCU and motor.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab5/flowchart.png" alt="Interrupt flow chart" />
+      <figcaption>Figure 2: Flow chart for interrupt handling.</figcaption>
+    </figure>
+
+    <h2>Results and Discussion</h2>
+    <p>
+      The system correctly calculates angular velocity in both directions. At 10V supply, the debugger reads
+      ±2 rev/s (sign depends on direction). Velocity increases/decreases with supply voltage and reads 0
+      when the power supply is off.
+    </p>
+
+    <h3>Oscilloscope — Interrupts vs. Polling</h3>
+    <p>
+      To observe the tradeoff, I wrote polling code alongside interrupts and toggled a pin for each to compare
+      toggling frequency on the oscilloscope.
+    </p>
+    <figure>
+      <img src="/images/labs/lab5/itrace.JPG" alt="Interrupt oscilloscope trace" />
+      <figcaption>Figure 3: Interrupt trace — 2.4kHz. Polling must sample at ≥4.8kHz to avoid aliasing.</figcaption>
+    </figure>
+    <figure>
+      <img src="/images/labs/lab5/pscope.JPG" alt="Polling oscilloscope trace" />
+      <figcaption>Figure 4: Polling trace — 2.20kHz with breaks, indicating missed encoder state changes.</figcaption>
+    </figure>
+
+    <h2>Conclusion</h2>
+    <p>
+      Successfully designed a system using interrupts to calculate the angular velocity of a motor from
+      rising and falling edges of the encoder signals. This lab took 8 hours.
+    </p>
+
+    <h2>AI Prototype Summary</h2>
+    <p>
+      Prompt: <em>Write me interrupt handlers to interface with a quadrature encoder on the STM32L432KC.
+      What pins should I connect the encoder to?</em>
+    </p>
+    <p>
+      ChatGPT identified the correct pins but the interrupt handlers didn't run. It then suggested switching
+      to TIM encoder mode over EXTI/GPIO interrupts — interesting, since EXTI interrupts worked well for me.
+    </p>
+  </section>
+</LabLayout>

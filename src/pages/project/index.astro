@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const sections = [
+  { slug: 'overview',       label: 'Overview',       desc: 'Project abstract, motivation, system block diagram, and acknowledgements.' },
+  { slug: 'documentation',  label: 'Documentation',  desc: 'Schematics, new hardware (microphone & VGA), bill of materials, and references.' },
+  { slug: 'fpga',           label: 'FPGA Design',    desc: '512-point FFT implementation and VGA display driver for real-time music score rendering.' },
+  { slug: 'mcu',            label: 'MCU Design',     desc: 'ADC data acquisition, double-buffering, and SPI transmission to the FPGA.' },
+  { slug: 'results',        label: 'Results',        desc: 'Specification checklist, testbench waveforms, and live note display demo.' },
+  { slug: 'team',           label: 'Team',           desc: 'About Julia Gong and Georgia Tai.' },
+];
+---
+
+<BaseLayout title="Live Music Transcriber" description="Real-time music transcription using FPGA FFT and VGA display">
+  <div class="project-page container">
+    <div class="chapter-divider" style="margin-top: 3rem;"><span>E155 Final Project</span></div>
+
+    <div class="project-hero">
+      <h1>Live Music Transcriber</h1>
+      <p class="project-hero__abstract">
+        A real-time music transcription system that takes in sound from a microphone, uses an FPGA-implemented
+        512-point FFT to extract note frequencies and durations, and displays the result as a music score on a
+        VGA monitor. Built with an STM32L432KC MCU and iCE40UP5K FPGA.
+      </p>
+      <div class="project-hero__links">
+        <a href="https://github.com/georgiatai/E155-final-project" target="_blank" rel="noopener" class="btn">
+          GitHub Repository
+        </a>
+      </div>
+    </div>
+
+    <div class="sections-grid">
+      {sections.map(s => (
+        <a href={`/project/${s.slug}`} class="section-card">
+          <h2 class="section-card__title">{s.label}</h2>
+          <p class="section-card__desc">{s.desc}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .project-page { padding: 2rem 2rem 4rem; }
+
+  .project-hero {
+    max-width: 700px;
+    margin-bottom: 3rem;
+  }
+  .project-hero h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1rem;
+  }
+  .project-hero__abstract {
+    font-size: 0.975rem;
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    line-height: 1.75;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.55rem 1.25rem;
+    background: var(--wine);
+    color: #FAF7F2;
+    font-size: 0.85rem;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn:hover { background: #6a2535; color: #FAF7F2; transform: translateY(-1px); }
+
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .section-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg);
+    border: 2px solid var(--wine);
+    border-radius: 0;
+    padding: 1.75rem;
+    color: var(--text);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .section-card:hover {
+    box-shadow: 0 6px 24px rgba(123, 45, 62, 0.15);
+    transform: translateY(-3px);
+  }
+  .section-card__title {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  .section-card__desc {
+    font-size: 0.9rem;
+    color: var(--gray);
+    flex: 1;
+  }
+</style>
