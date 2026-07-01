@@ -1,11 +1,12 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <ProjectLayout title="Documentation" activeSlug="documentation">
   <h2>Schematics</h2>
   <figure>
-    <img src="/images/project/projschematic.png" alt="System schematic" />
+    <img src={`${base}images/project/projschematic.png`} alt="System schematic" />
     <figcaption>Schematics of the physical system.</figcaption>
   </figure>
   <p>
@@ -30,7 +31,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     We used a 1024×600 pixel VGA display at 60Hz refresh rate. A
     <a href="https://www.adafruit.com/product/3125" target="_blank" rel="noopener">breakout cord</a>
     connects the FPGA to the VGA. The VGA allows use of FPGA primitives such as <code>PLL_B</code> for its
-    clock — new from the previous labs. Full VGA control design is documented in the <a href="/project/fpga">FPGA page</a>.
+    clock — new from the previous labs. Full VGA control design is documented in the <a href={`${base}project/fpga`}>FPGA page</a>.
   </p>
 
   <h2>Bill of Materials</h2>

@@ -5,9 +5,10 @@ export interface Props {
   githubUrl?: string;
 }
 const { title, labNum, githubUrl } = Astro.props;
+const base = import.meta.env.BASE_URL;
 
-const prev = labNum > 1 ? `/labs/lab${labNum - 1}` : null;
-const next = labNum < 6 ? `/labs/lab${labNum + 1}` : null;
+const prev = labNum > 1 ? `${base}labs/lab${labNum - 1}` : null;
+const next = labNum < 6 ? `${base}labs/lab${labNum + 1}` : null;
 const prevLabel = labNum > 1 ? `Lab ${labNum - 1}` : null;
 const nextLabel = labNum < 6 ? `Lab ${labNum + 1}` : null;
 ---
@@ -17,20 +18,19 @@ const nextLabel = labNum < 6 ? `Lab ${labNum + 1}` : null;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title} — Julia Gong</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
 <body>
-  <!-- Reuse BaseLayout nav inline to avoid double-import complexity -->
   <nav class="nav">
     <div class="nav__inner">
-      <a href="/" class="nav__wordmark">Julia Gong</a>
+      <a href={base} class="nav__wordmark">Julia Gong</a>
       <ul class="nav__links">
-        <li><a href="/" class="nav__link">About</a></li>
-        <li><a href="/labs" class="nav__link nav__link--active">E155 Labs</a></li>
-        <li><a href="/project" class="nav__link">Live Music Transcriber</a></li>
-        <li><a href="/artwork" class="nav__link">Artwork</a></li>
+        <li><a href={base} class="nav__link">About</a></li>
+        <li><a href={`${base}labs`} class="nav__link nav__link--active">E155 Labs</a></li>
+        <li><a href={`${base}project`} class="nav__link">Live Music Transcriber</a></li>
+        <li><a href={`${base}artwork`} class="nav__link">Artwork</a></li>
       </ul>
       <div class="nav__social">
         <a href="https://www.linkedin.com/in/julia-gong-b8222830a" target="_blank" rel="noopener" aria-label="LinkedIn">
@@ -46,11 +46,11 @@ const nextLabel = labNum < 6 ? `Lab ${labNum + 1}` : null;
   <div class="lab-page">
     <aside class="lab-sidebar">
       <div class="sidebar__back">
-        <a href="/labs">← All Labs</a>
+        <a href={`${base}labs`}>← All Labs</a>
       </div>
       <nav class="sidebar__nav">
         {[1,2,3,4,5,6].map(n => (
-          <a href={`/labs/lab${n}`} class:list={['sidebar__item', { 'sidebar__item--active': n === labNum }]}>
+          <a href={`${base}labs/lab${n}`} class:list={['sidebar__item', { 'sidebar__item--active': n === labNum }]}>
             Lab {n}
           </a>
         ))}

@@ -1,5 +1,6 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <ProjectLayout title="FPGA Design" activeSlug="fpga">
@@ -10,7 +11,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     Frequency outputs of the FFT are decoded into corresponding notes and durations, passed into the VGA module.
   </p>
   <figure>
-    <img src="/images/project/top_bd1.png" alt="FPGA system block diagram" />
+    <img src={`${base}images/project/top_bd1.png`} alt="FPGA system block diagram" />
     <figcaption>Figure 1: System-level block diagram of the FPGA design.</figcaption>
   </figure>
   <p>
@@ -63,7 +64,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
 
   <h3>FFT Block Diagram</h3>
   <figure>
-    <img src="/images/project/fft_block.png" alt="FFT block diagram" />
+    <img src={`${base}images/project/fft_block.png`} alt="FFT block diagram" />
     <figcaption>Figure 2: Block diagram for the FFT implementation.</figcaption>
   </figure>
 
@@ -77,7 +78,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     <li><strong>Music score module</strong> — draws score lines, treble clef, and notes</li>
   </ul>
   <figure>
-    <img src="/images/project/pll.jpg" alt="PLL oscilloscope trace" />
+    <img src={`${base}images/project/pll.jpg`} alt="PLL oscilloscope trace" />
     <figcaption>Figure 3: Oscilloscope trace of PLL clock.</figcaption>
   </figure>
   <p>
@@ -88,11 +89,11 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     above or below the staff.
   </p>
   <figure>
-    <img src="/images/project/score1.jpg" alt="VGA score display" />
+    <img src={`${base}images/project/score1.jpg`} alt="VGA score display" />
     <figcaption>Figure 4: Score on the VGA monitor.</figcaption>
   </figure>
   <figure>
-    <img src="/images/project/score2.jpg" alt="VGA note debugging" />
+    <img src={`${base}images/project/score2.jpg`} alt="VGA note debugging" />
     <figcaption>Figure 5: Note display debugging on the VGA monitor.</figcaption>
   </figure>
 </ProjectLayout>

@@ -3,5 +3,5 @@ import { defineConfig } from 'astro/config';
 
 export default defineConfig({
   site: 'https://juliacygong.github.io',
-  base: '/portfolio_jcg',
+  base: '/portfolio_jcg/',
 });

@@ -1,5 +1,6 @@
 ---
 import LabLayout from '../../layouts/LabLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <LabLayout title="Lab 1: FPGA and MCU Setup and Testing" labNum={1} githubUrl="https://github.com/juliacygong/E155/tree/main/lab01">
@@ -18,11 +19,11 @@ import LabLayout from '../../layouts/LabLayout.astro';
       The following tables establish the relationship between the various inputs and outputs on the development board.
     </p>
     <figure>
-      <img src="/images/labs/lab1/lab1_table1.png" alt="Table of inputs and outputs" />
+      <img src={`${base}images/labs/lab1/lab1_table1.png`} alt="Table of inputs and outputs" />
       <figcaption>Figure 1: Inputs and outputs required in the FPGA design.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab1/lab1_table2.png" alt="DIP switch to LED mapping" />
+      <img src={`${base}images/labs/lab1/lab1_table2.png`} alt="DIP switch to LED mapping" />
       <figcaption>Figure 2: Relationship between DIP switch inputs and LED outputs.</figcaption>
     </figure>
     <p>
@@ -38,11 +39,11 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Hardware Implementation</h3>
     <figure>
-      <img src="/images/labs/lab1/board.jpg" alt="Completed development board" />
+      <img src={`${base}images/labs/lab1/board.jpg`} alt="Completed development board" />
       <figcaption>Figure 3: The completed development board.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab1/breadboard.png" alt="Breadboard layout" />
+      <img src={`${base}images/labs/lab1/breadboard.png`} alt="Breadboard layout" />
       <figcaption>Figure 4: Physical breadboard layout of the 7-segment display.</figcaption>
     </figure>
     <p>
@@ -60,13 +61,13 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Block Diagram</h3>
     <figure>
-      <img src="/images/labs/lab1/lab1_blockdiagram.jpeg" alt="Block diagram" />
+      <img src={`${base}images/labs/lab1/lab1_blockdiagram.jpeg`} alt="Block diagram" />
       <figcaption>Figure 5: Block diagram for the two Verilog modules.</figcaption>
     </figure>
 
     <h3>Schematic</h3>
     <figure>
-      <img src="/images/labs/lab1/lab1_schematic.jpeg" alt="Schematic" />
+      <img src={`${base}images/labs/lab1/lab1_schematic.jpeg`} alt="Schematic" />
       <figcaption>Figure 6: Schematic for the FPGA and 7-segment display.</figcaption>
     </figure>
 
@@ -76,14 +77,14 @@ import LabLayout from '../../layouts/LabLayout.astro';
       verify the LED oscillating frequency.
     </p>
     <figure>
-      <img src="/images/labs/lab1/lab1_waveforms.png" alt="Testbench waveforms" />
+      <img src={`${base}images/labs/lab1/lab1_waveforms.png`} alt="Testbench waveforms" />
     </figure>
     <figure>
-      <img src="/images/labs/lab1/lab1_results.png" alt="Testbench results" />
+      <img src={`${base}images/labs/lab1/lab1_results.png`} alt="Testbench results" />
       <figcaption>Figure 7: Testbench simulation results from Questa. All 16 tests passed with no errors.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab1/lab1_oscilloscope.JPG" alt="Oscilloscope trace" />
+      <img src={`${base}images/labs/lab1/lab1_oscilloscope.JPG`} alt="Oscilloscope trace" />
       <figcaption>Figure 8: Oscilloscope trace of the LED at 2.4Hz (measured frequency matches desired).</figcaption>
     </figure>
 

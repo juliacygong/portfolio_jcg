@@ -1,11 +1,12 @@
 ---
 import ProjectLayout from '../../layouts/ProjectLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <ProjectLayout title="About the Team" activeSlug="team">
   <div class="team-grid">
     <div class="team-member">
-      <img src="/images/project/julia_headshot.jpg" alt="Julia Gong" class="team-member__photo" />
+      <img src={`${base}images/project/julia_headshot.jpg`} alt="Julia Gong" class="team-member__photo" />
       <h2 class="team-member__name">Julia Gong</h2>
       <div class="team-member__links">
         <a href="https://www.linkedin.com/in/julia-gong-b8222830a" target="_blank" rel="noopener">LinkedIn</a>
@@ -20,7 +21,7 @@ import ProjectLayout from '../../layouts/ProjectLayout.astro';
     </div>
 
     <div class="team-member">
-      <img src="/images/project/georgia_headshot.jpg" alt="Georgia Tai" class="team-member__photo" />
+      <img src={`${base}images/project/georgia_headshot.jpg`} alt="Georgia Tai" class="team-member__photo" />
       <h2 class="team-member__name">Georgia Tai</h2>
       <div class="team-member__links">
         <a href="https://www.linkedin.com/in/georgia-tai/" target="_blank" rel="noopener">LinkedIn</a>

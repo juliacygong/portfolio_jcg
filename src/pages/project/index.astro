@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
 
 const sections = [
   { slug: 'overview',       label: 'Overview',       desc: 'Project abstract, motivation, system block diagram, and acknowledgements.' },
@@ -31,7 +32,7 @@ const sections = [
 
     <div class="sections-grid">
       {sections.map(s => (
-        <a href={`/project/${s.slug}`} class="section-card">
+        <a href={`${base}project/${s.slug}`} class="section-card">
           <h2 class="section-card__title">{s.label}</h2>
           <p class="section-card__desc">{s.desc}</p>
         </a>

@@ -1,5 +1,6 @@
 ---
 import LabLayout from '../../layouts/LabLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <LabLayout title="Lab 6: IoT and SPI" labNum={6} githubUrl="https://github.com/juliacygong/E155/tree/main/lab06/src">
@@ -37,7 +38,7 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Schematic</h3>
     <figure>
-      <img src="/images/labs/lab6/lab6schematic.jpeg" alt="Schematic" />
+      <img src={`${base}images/labs/lab6/lab6schematic.jpeg`} alt="Schematic" />
       <figcaption>Figure 1: MCU connections to LED, ESP8266, and temperature sensor.</figcaption>
     </figure>
 
@@ -51,7 +52,7 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>SPI Logic Analyzer Trace</h3>
     <figure>
-      <img src="/images/labs/lab6/lab6scope.JPG" alt="Logic analyzer trace" />
+      <img src={`${base}images/labs/lab6/lab6scope.JPG`} alt="Logic analyzer trace" />
       <figcaption>Figure 2: Logic analyzer trace for an 8-bit temperature sensor command.</figcaption>
     </figure>
     <p>Signals: D0 = CS, D1 = CLK, D2 = MISO, D3 = MOSI.</p>

@@ -4,6 +4,7 @@ export interface Props {
   activeSlug: string;
 }
 const { title, activeSlug } = Astro.props;
+const base = import.meta.env.BASE_URL;
 
 const sections = [
   { slug: 'overview',      label: 'Overview' },
@@ -20,19 +21,19 @@ const sections = [
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title} — Julia Gong</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
 <body>
   <nav class="nav">
     <div class="nav__inner">
-      <a href="/" class="nav__wordmark">Julia Gong</a>
+      <a href={base} class="nav__wordmark">Julia Gong</a>
       <ul class="nav__links">
-        <li><a href="/" class="nav__link">About</a></li>
-        <li><a href="/labs" class="nav__link">E155 Labs</a></li>
-        <li><a href="/project" class="nav__link nav__link--active">Live Music Transcriber</a></li>
-        <li><a href="/artwork" class="nav__link">Artwork</a></li>
+        <li><a href={base} class="nav__link">About</a></li>
+        <li><a href={`${base}labs`} class="nav__link">E155 Labs</a></li>
+        <li><a href={`${base}project`} class="nav__link nav__link--active">Live Music Transcriber</a></li>
+        <li><a href={`${base}artwork`} class="nav__link">Artwork</a></li>
       </ul>
       <div class="nav__social">
         <a href="https://www.linkedin.com/in/julia-gong-b8222830a" target="_blank" rel="noopener" aria-label="LinkedIn">
@@ -48,11 +49,11 @@ const sections = [
   <div class="project-layout">
     <aside class="project-sidebar">
       <div class="sidebar__back">
-        <a href="/project">← Live Music Transcriber</a>
+        <a href={`${base}project`}>← Live Music Transcriber</a>
       </div>
       <nav class="sidebar__nav">
         {sections.map(s => (
-          <a href={`/project/${s.slug}`} class:list={['sidebar__item', { 'sidebar__item--active': s.slug === activeSlug }]}>
+          <a href={`${base}project/${s.slug}`} class:list={['sidebar__item', { 'sidebar__item--active': s.slug === activeSlug }]}>
             {s.label}
           </a>
         ))}

@@ -1,5 +1,6 @@
 ---
 import LabLayout from '../../layouts/LabLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <LabLayout title="Lab 5: Interrupts" labNum={5} githubUrl="https://github.com/juliacygong/E155/tree/main/lab05">
@@ -37,11 +38,11 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Schematic</h3>
     <figure>
-      <img src="/images/labs/lab5/lab5_schematic.png" alt="Schematic" />
+      <img src={`${base}images/labs/lab5/lab5_schematic.png`} alt="Schematic" />
       <figcaption>Figure 1: Connections between MCU and motor.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab5/flowchart.png" alt="Interrupt flow chart" />
+      <img src={`${base}images/labs/lab5/flowchart.png`} alt="Interrupt flow chart" />
       <figcaption>Figure 2: Flow chart for interrupt handling.</figcaption>
     </figure>
 
@@ -58,11 +59,11 @@ import LabLayout from '../../layouts/LabLayout.astro';
       toggling frequency on the oscilloscope.
     </p>
     <figure>
-      <img src="/images/labs/lab5/itrace.JPG" alt="Interrupt oscilloscope trace" />
+      <img src={`${base}images/labs/lab5/itrace.JPG`} alt="Interrupt oscilloscope trace" />
       <figcaption>Figure 3: Interrupt trace — 2.4kHz. Polling must sample at ≥4.8kHz to avoid aliasing.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab5/pscope.JPG" alt="Polling oscilloscope trace" />
+      <img src={`${base}images/labs/lab5/pscope.JPG`} alt="Polling oscilloscope trace" />
       <figcaption>Figure 4: Polling trace — 2.20kHz with breaks, indicating missed encoder state changes.</figcaption>
     </figure>
 

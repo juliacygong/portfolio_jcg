@@ -5,16 +5,17 @@ export interface Props {
 }
 const { title = 'Julia Gong', description = 'Engineer · Artist · Researcher' } = Astro.props;
 const pathname = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
 
 const navLinks = [
-  { href: '/',        label: 'About' },
-  { href: '/labs',    label: 'E155 Labs' },
-  { href: '/project', label: 'Live Music Transcriber' },
-  { href: '/artwork', label: 'Artwork' },
+  { href: base,               label: 'About' },
+  { href: `${base}labs`,      label: 'E155 Labs' },
+  { href: `${base}project`,   label: 'Live Music Transcriber' },
+  { href: `${base}artwork`,   label: 'Artwork' },
 ];
 
 function isActive(href: string) {
-  if (href === '/') return pathname === '/';
+  if (href === base) return pathname === base || pathname === base.replace(/\/$/, '');
   return pathname.startsWith(href);
 }
 ---
@@ -26,14 +27,14 @@ function isActive(href: string) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
   <title>{title === 'Julia Gong' ? title : `${title} — Julia Gong`}</title>
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 </head>
 <body>
   <nav class="nav">
     <div class="nav__inner">
-      <a href="/" class="nav__wordmark">Julia Gong</a>
+      <a href={base} class="nav__wordmark">Julia Gong</a>
       <ul class="nav__links">
         {navLinks.map(({ href, label }) => (
           <li>

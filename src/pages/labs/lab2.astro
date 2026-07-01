@@ -1,5 +1,6 @@
 ---
 import LabLayout from '../../layouts/LabLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <LabLayout title="Lab 2: Multiplexed 7-Segment Display" labNum={2} githubUrl="https://github.com/juliacygong/E155/tree/main/lab02">
@@ -24,7 +25,7 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Hardware Implementation</h3>
     <figure>
-      <img src="/images/labs/lab2/lab2_board.jpg" alt="Breadboard layout" />
+      <img src={`${base}images/labs/lab2/lab2_board.jpg`} alt="Breadboard layout" />
       <figcaption>Figure 1: Breadboard layout of the dual 7-segment display and 5 LEDs connected to the FPGA.</figcaption>
     </figure>
     <p>
@@ -49,13 +50,13 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Block Diagram</h3>
     <figure>
-      <img src="/images/labs/lab2/lab2_block.png" alt="Block diagram" />
+      <img src={`${base}images/labs/lab2/lab2_block.png`} alt="Block diagram" />
       <figcaption>Figure 2: Block diagram connecting all modules.</figcaption>
     </figure>
 
     <h3>Schematic</h3>
     <figure>
-      <img src="/images/labs/lab2/lab2_schematic.jpeg" alt="Schematic" />
+      <img src={`${base}images/labs/lab2/lab2_schematic.jpeg`} alt="Schematic" />
       <figcaption>Figure 3: Schematic showing FPGA connections to dual 7-segment display and LEDs.</figcaption>
     </figure>
 
@@ -64,31 +65,31 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Testbench Simulation</h3>
     <figure>
-      <img src="/images/labs/lab2/mux_waveform.png" alt="Mux waveform" />
+      <img src={`${base}images/labs/lab2/mux_waveform.png`} alt="Mux waveform" />
     </figure>
     <figure>
-      <img src="/images/labs/lab2/mux_result.png" alt="Mux testbench results" />
+      <img src={`${base}images/labs/lab2/mux_result.png`} alt="Mux testbench results" />
       <figcaption>Figure 4: Testbench results for the mux module — correct anode and segment selection verified.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab2/led_waveform.png" alt="LED waveform" />
+      <img src={`${base}images/labs/lab2/led_waveform.png`} alt="LED waveform" />
     </figure>
     <figure>
-      <img src="/images/labs/lab2/led_results.png" alt="LED testbench results" />
+      <img src={`${base}images/labs/lab2/led_results.png`} alt="LED testbench results" />
       <figcaption>Figure 5: Testbench results for the 5 LED display module.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab2/seg_waveform.png" alt="7-segment waveform" />
+      <img src={`${base}images/labs/lab2/seg_waveform.png`} alt="7-segment waveform" />
     </figure>
     <figure>
-      <img src="/images/labs/lab2/seg_results.png" alt="7-segment testbench results" />
+      <img src={`${base}images/labs/lab2/seg_results.png`} alt="7-segment testbench results" />
       <figcaption>Figure 6: Testbench results for the 7-segment display module.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab2/lab2_waveform.png" alt="Top module waveform" />
+      <img src={`${base}images/labs/lab2/lab2_waveform.png`} alt="Top module waveform" />
     </figure>
     <figure>
-      <img src="/images/labs/lab2/lab2_result.png" alt="Top module testbench results" />
+      <img src={`${base}images/labs/lab2/lab2_result.png`} alt="Top module testbench results" />
       <figcaption>Figure 7: Top module simulation — anode signals toggle at the correct frequency.</figcaption>
     </figure>
 

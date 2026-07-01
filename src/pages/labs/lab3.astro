@@ -1,5 +1,6 @@
 ---
 import LabLayout from '../../layouts/LabLayout.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <LabLayout title="Lab 3: Keypad Scanner" labNum={3} githubUrl="https://github.com/juliacygong/E155/tree/main/lab03">
@@ -22,7 +23,7 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Hardware Implementation</h3>
     <figure>
-      <img src="/images/labs/lab3/lab3_board.jpg" alt="Breadboard layout" />
+      <img src={`${base}images/labs/lab3/lab3_board.jpg`} alt="Breadboard layout" />
       <figcaption>Figure 1: Breadboard layout of the dual 7-segment display with the 4×4 keyboard.</figcaption>
     </figure>
     <p>
@@ -45,7 +46,7 @@ import LabLayout from '../../layouts/LabLayout.astro';
       taps shorter than the debounce window may be missed — acceptable for human inputs.
     </p>
     <figure>
-      <img src="/images/labs/lab3/lab3_fsm.png" alt="FSM diagram" />
+      <img src={`${base}images/labs/lab3/lab3_fsm.png`} alt="FSM diagram" />
       <figcaption>Figure 2: FSM used to debounce key inputs (6 states).</figcaption>
     </figure>
 
@@ -75,13 +76,13 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Block Diagram</h3>
     <figure>
-      <img src="/images/labs/lab3/lab3_block.png" alt="Block diagram" />
+      <img src={`${base}images/labs/lab3/lab3_block.png`} alt="Block diagram" />
       <figcaption>Figure 3: Block diagram connecting all modules.</figcaption>
     </figure>
 
     <h3>Schematic</h3>
     <figure>
-      <img src="/images/labs/lab3/lab3_schematic.png" alt="Schematic" />
+      <img src={`${base}images/labs/lab3/lab3_schematic.png`} alt="Schematic" />
       <figcaption>Figure 4: FPGA schematic showing connections to dual 7-segment display and keypad.</figcaption>
     </figure>
 
@@ -93,29 +94,29 @@ import LabLayout from '../../layouts/LabLayout.astro';
 
     <h3>Testbench Simulation</h3>
     <figure>
-      <img src="/images/labs/lab3/mux_waveform.png" alt="Mux waveform" />
+      <img src={`${base}images/labs/lab3/mux_waveform.png`} alt="Mux waveform" />
     </figure>
     <figure>
-      <img src="/images/labs/lab3/mux_result.png" alt="Mux results" />
+      <img src={`${base}images/labs/lab3/mux_result.png`} alt="Mux results" />
       <figcaption>Figure 6: Mux module testbench — correct anode signals verified.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab3/seg_waveform.png" alt="7-seg waveform" />
+      <img src={`${base}images/labs/lab3/seg_waveform.png`} alt="7-seg waveform" />
     </figure>
     <figure>
-      <img src="/images/labs/lab3/seg_results.png" alt="7-seg results" />
+      <img src={`${base}images/labs/lab3/seg_results.png`} alt="7-seg results" />
       <figcaption>Figure 7: 7-segment display testbench results.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab3/scan_waves.png" alt="Scanner waveform" />
+      <img src={`${base}images/labs/lab3/scan_waves.png`} alt="Scanner waveform" />
       <figcaption>Figure 8: Scanner module — rows cycling to scan the keyboard.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab3/fsm_waves.png" alt="FSM waveform" />
+      <img src={`${base}images/labs/lab3/fsm_waves.png`} alt="FSM waveform" />
       <figcaption>Figure 9: FSM module — correct state transitions on column input.</figcaption>
     </figure>
     <figure>
-      <img src="/images/labs/lab3/lab3_waves.png" alt="Top module waveform" />
+      <img src={`${base}images/labs/lab3/lab3_waves.png`} alt="Top module waveform" />
       <figcaption>Figure 10: Top-level module — all modules properly connected and toggling.</figcaption>
     </figure>
 
